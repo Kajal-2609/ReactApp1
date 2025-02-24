@@ -1,0 +1,296 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Rutuja",
+      "email": "rutuja04dabhade@gmail.com",
+      "password": "1234",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "name": "Harsh",
+      "email": "harsh2006dabhade@gmail.com",
+      "password": "5678",
+      "role": "user"
+    },
+    {
+      "id": "3e27",
+      "name": "Chetana Patil",
+      "email": "chetanap2005@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "7743",
+      "name": "kajal",
+      "email": "khandekarkajal123@gmail.com",
+      "password": "scscs"
+    },
+    {
+      "id": "f1f2",
+      "name": "kajal",
+      "email": "khandekarkajal123@gmail.com",
+      "password": "scscs"
+    },
+    {
+      "id": "246a",
+      "name": "kajal",
+      "email": "khandekarkajal123@gmail.com",
+      "password": "scscs",
+      "role": "user"
+    },
+    {
+      "id": "0cf3",
+      "name": "kajal",
+      "email": "khandekarkajal123@gmail.com",
+      "password": "scscs"
+    },
+    {
+      "id": "f65e",
+      "name": "kajal",
+      "email": "khandekarkajal123@gmail.com",
+      "password": "scscs"
+    },
+    {
+      "id": "048a",
+      "name": "kajal",
+      "email": "khandekarkajal123@gmail.com",
+      "password": "scscs",
+      "role": "user"
+    },
+    {
+      "id": "b90b",
+      "name": "kajal",
+      "email": "khandekarkajal123@gmail.com",
+      "password": "scscs"
+    },
+    {
+      "id": "4557",
+      "name": "kajal",
+      "email": "khandekarkajal123@gmail.com",
+      "password": "scscs"
+    },
+    {
+      "id": "8520",
+      "role": "user"
+    },
+    {
+      "id": "f368",
+      "Username": "mahesh",
+      "email": "mahesh@gmail.com",
+      "password": "mahesh17",
+      "role": "user"
+    }
+  ],
+  "fruits": [
+    {
+      "id": "1",
+      "name": "Grapes",
+      "image": "grapes.jpg",
+      "unit": "kg",
+      "mrp": 120,
+      "discount": 10,
+      "inStock": false,
+      "qty": 0,
+      "type": "Organic"
+    },
+    {
+      "id": "2",
+      "name": "Mango",
+      "image": "mango.jpg",
+      "unit": "doz",
+      "mrp": 500,
+      "discount": 8,
+      "inStock": true,
+      "qty": 0,
+      "type": "Organic"
+    },
+    {
+      "id": "3",
+      "name": "Banana",
+      "image": "banana.jpg",
+      "unit": "doz",
+      "mrp": 60,
+      "discount": 0,
+      "inStock": true,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "4",
+      "name": "Apple",
+      "image": "apple.jpg",
+      "unit": "kg",
+      "mrp": 180,
+      "discount": 7,
+      "inStock": true,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "5",
+      "name": "Anjeer",
+      "image": "anjeer.jpg",
+      "unit": "kg",
+      "mrp": 100,
+      "discount": 0,
+      "inStock": true,
+      "qty": 0,
+      "type": "Organic"
+    },
+    {
+      "id": "6",
+      "name": "Strawberry",
+      "image": "strawberry.jpg",
+      "unit": "kg",
+      "mrp": 200,
+      "discount": 20,
+      "inStock": true,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "7",
+      "name": "Papaya",
+      "image": "papaya.jpg",
+      "unit": "kg",
+      "mrp": 50,
+      "discount": 15,
+      "inStock": true,
+      "qty": 0,
+      "type": "Organic"
+    },
+    {
+      "id": "8",
+      "name": "Cherry",
+      "image": "cherry.jpg",
+      "unit": "kg",
+      "mrp": 300,
+      "discount": 5,
+      "inStock": true,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "9",
+      "name": "Chikoo",
+      "image": "Chikoo.jpg",
+      "unit": "kg",
+      "mrp": 60,
+      "discount": 5,
+      "inStock": false,
+      "qty": 0,
+      "type": "Organic"
+    },
+    {
+      "id": "10",
+      "name": "Kiwi",
+      "image": "Kiwi.jpg",
+      "unit": "piece",
+      "mrp": 20,
+      "discount": 0,
+      "inStock": false,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "11",
+      "name": "Orange",
+      "image": "orange.jpg",
+      "unit": "kg",
+      "mrp": 200,
+      "discount": 10,
+      "inStock": true,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "12",
+      "name": "Pear",
+      "image": "pear.jpg",
+      "unit": "kg",
+      "mrp": 200,
+      "discount": 7,
+      "inStock": true,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "13",
+      "name": "Pineapple",
+      "image": "pineapple.jpg",
+      "unit": "piece",
+      "mrp": 100,
+      "discount": 50,
+      "inStock": true,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "14",
+      "name": "Pomegranete",
+      "image": "pomegranete.jpg",
+      "unit": "kg",
+      "mrp": 200,
+      "discount": 5,
+      "inStock": true,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "15",
+      "name": "Sitaphal",
+      "image": "sitaphal.jpg",
+      "unit": "kg",
+      "mrp": 100,
+      "discount": 10,
+      "inStock": true,
+      "qty": 0,
+      "type": "Organic"
+    },
+    {
+      "id": "16",
+      "name": "Watermelon",
+      "image": "watermelon.jpg",
+      "unit": "piece",
+      "mrp": 80,
+      "discount": 50,
+      "inStock": true,
+      "qty": 0,
+      "type": "Organic"
+    },
+    {
+      "id": "17",
+      "name": "Sweetlime",
+      "image": "sweetlime.jpg",
+      "unit": "kg",
+      "mrp": 200,
+      "discount": 5,
+      "inStock": true,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "18",
+      "name": "Peach",
+      "image": "peach.jpg",
+      "unit": "kg",
+      "mrp": 200,
+      "discount": 10,
+      "inStock": false,
+      "qty": 0,
+      "type": "Non-Organic"
+    },
+    {
+      "id": "19",
+      "name": "Dragon",
+      "image": "dragon.jpg",
+      "unit": "piece",
+      "mrp": 60,
+      "discount": 0,
+      "inStock": true,
+      "qty": 0,
+      "type": "Non-Organic"
+    }
+  ]
+}

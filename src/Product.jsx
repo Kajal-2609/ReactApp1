@@ -2,19 +2,28 @@ import "./App.css";
 import NavBar from "./NavBar";
 export default function Product(props) {
   let { p } = props;
-  let finalprice = p.mrp - p.mrp * (p.discount / 100);
+  let finalprice = p.mrp - p.mrp * (p.discount / 100).toFixed(1);
   let displayprice = p.qty * finalprice;
   function handleClick(action) {
     props.onButtonClick(p, action);
   }
-
+  function handleAddToCartButtonClick() {
+    props.onAddToCartButtonClick(p);
+  }
+  // handleAddToCartButtonClick
+  function handleDecrementButtonClick() {
+    props.onDecrementButtonClick(p);
+  }
+  function handleIncrementButtonClick() {
+    props.onIncrementButtonClick(p);
+  }
   return (
     <>
-      <div className="col-3  p-3  ">
-        <div className=" radius box p-2">
+      <div className="col-3 p-3 ">
+        <div className=" radius   bg-opacity-75  bg-body box myb p-2">
           <div className="p-2">
-            <div className=" position-absolute radius md">
-              {p.discount > 0 ? "" + p.discount + "% discount" : ""}
+            <div className=" position-absolute radius  md">
+              {p.discount > 0 ? "" + p.discount + "% discount" : " "}
             </div>
             <img className=" img-fluid  " src={p.image} alt="" />
           </div>
@@ -24,7 +33,7 @@ export default function Product(props) {
           {p.discount == 0 && <h3>Rs.{p.mrp}</h3>}
           {p.discount != 0 && (
             <h3>
-              Rs. <span className=" text-decoration-line-through">{p.mrp}</span>{" "}
+              Rs. <span className="text-decoration-line-through">{p.mrp}</span>{" "}
               {finalprice}
             </h3>
           )}
@@ -32,9 +41,9 @@ export default function Product(props) {
           <div className="text-center ">
             {p.qty == 0 && (
               <button
-                className={"btn login text"}
+                className={"btn login text text-black"}
                 disabled={!p.inStock}
-                onClick={() => handleClick("+")}
+                onClick={handleAddToCartButtonClick}
               >
                 {p.inStock ? "Add to Cart" : "out of stock"}
               </button>
@@ -44,9 +53,9 @@ export default function Product(props) {
               <div className="row">
                 <div className="col-4">
                   <button
-                    className="btn bsize  myb plusminusb  "
+                    className="btn bsize  myb plusminusb "
                     id="-"
-                    onClick={() => handleClick("-")}
+                    onClick={handleDecrementButtonClick}
                   >
                     -
                   </button>{" "}
@@ -56,9 +65,9 @@ export default function Product(props) {
                 </div>
                 <div className="col-4">
                   <button
-                    className="btn  bsize  plusminusb "
+                    className="btn bsize plusminusb "
                     id="+"
-                    onClick={() => handleClick("+")}
+                    onClick={handleIncrementButtonClick}
                   >
                     +
                   </button>
