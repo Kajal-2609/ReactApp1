@@ -2,11 +2,12 @@ import React from "react";
 
 export default function NavBar(props) {
   let { cnt } = props;
-
+  let {name}=props;
   let { cartItems } = props;
   let { totalprice } = props;
   let { view } = props;
   let { user } = props;
+  let {loginStatus}=props;
   function handleFormButtonClick(view) {
     console.log("login clicked");
     props.onFormButtonClick(view);
@@ -27,23 +28,29 @@ export default function NavBar(props) {
   }
   return (
     <>
-    <div className=" row     bgi   align-items-center justify-content-around border-bottom border-4 border-black bg    ">
+      <div className=" row fixed-top  bgi   align-items-center justify-content-around border-bottom border-4 border-black  bg    ">
         <div
-          className="col-2   "
+          className="col-4  col-lg-2  text-center "
           id=" logo"
           onClick={() => handleFormButtonClick("productPage")}
         >
-          <img className="    logobr w-50 h-50 " src="/logo.png" alt="" />
+          <img
+            className="   img-fluid border-black logobr w-50 h-25 "
+            src="/logo.png"
+            alt=""
+          />
         </div>
-        <div className="col-7 text-center  ">
-          {/* if user is filled its information successfully then show them logout button for exit */}
+        <div className="col-5 col-lg-3 col-sm-6 col-md-12 text-center  ">
+          { loginStatus=="success"&&<div className="text-white h5">Welcome {name} !</div>}
           {user ? (
-            <button
-              className="btn btn-primary  m-2"
-              onClick={handleLogoutClick}
-            >
-              Logout
-            </button>
+            <>
+              <div className=" p-2 name">
+                {" "}
+                <button className="login  m-2" onClick={handleLogoutClick}>
+                  Logout
+                </button>
+              </div>
+            </>
           ) : (
             <>
               <button
@@ -66,17 +73,18 @@ export default function NavBar(props) {
             </>
           )}
         </div>
-        <div className="col-2  text-left bg-white   cart p-3 mt-3 ">
-         
-          <span  className="cart-container ">
-            <i className="bi bi-cart ">
-              {cnt}
-              <div className="h5 ">Rs.{totalprice}</div>
-            </i>
-          </span>
+        <div className=" col-lg-1  col-3   text-black  cart   ">
+          <div className="">
+            <button className="cart-container radius " onClick={handleCartItems}>
+              <i className=" bi-cart2  fs-1">
+                {cnt}
+                <div className="h6 text-center ">Rs.{totalprice}</div>
+              </i>
+            </button>
+          </div>
         </div>
-        </div>
-      
+      </div>
+
       {/* {<div className=" text-white text-center  bg-black">
         {" "}
         WELCOME TO FRUIT SHOP{" "}

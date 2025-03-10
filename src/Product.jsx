@@ -19,10 +19,10 @@ export default function Product(props) {
   }
   return (
     <>
-      <div className="col-3 p-3 ">
+      <div className="col-12 col-lg-3 p-3  ">
         <div className=" radius   bg-opacity-75  bg-body box myb p-2">
           <div className="p-2">
-            <div className=" position-absolute radius  md">
+            <div className=" position-absolute col-lg-2 myb col-5  radiu  md">
               {p.discount > 0 ? "" + p.discount + "% discount" : " "}
             </div>
             <img className=" img-fluid  " src={p.image} alt="" />
@@ -41,9 +41,9 @@ export default function Product(props) {
           <div className="text-center ">
             {p.qty == 0 && (
               <button
-                className={"btn login text text-black"}
-                disabled={!p.inStock}
-                onClick={handleAddToCartButtonClick}
+                className="btn login text text-black  myb"
+                disabled={!p.inStock}                       
+                onClick={handleAddToCartButtonClick}       
               >
                 {p.inStock ? "Add to Cart" : "out of stock"}
               </button>

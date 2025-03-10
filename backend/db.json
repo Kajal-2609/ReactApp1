@@ -2,8 +2,8 @@
   "users": [
     {
       "id": "1",
-      "name": "Rutuja",
-      "email": "rutuja04dabhade@gmail.com",
+      "name": "Kajal",
+      "email": "Kkajal@gmail.com",
       "password": "1234",
       "role": "admin"
     },
@@ -21,64 +21,10 @@
       "password": "1234"
     },
     {
-      "id": "7743",
-      "name": "kajal",
-      "email": "khandekarkajal123@gmail.com",
-      "password": "scscs"
-    },
-    {
-      "id": "f1f2",
-      "name": "kajal",
-      "email": "khandekarkajal123@gmail.com",
-      "password": "scscs"
-    },
-    {
-      "id": "246a",
-      "name": "kajal",
-      "email": "khandekarkajal123@gmail.com",
-      "password": "scscs",
-      "role": "user"
-    },
-    {
-      "id": "0cf3",
-      "name": "kajal",
-      "email": "khandekarkajal123@gmail.com",
-      "password": "scscs"
-    },
-    {
-      "id": "f65e",
-      "name": "kajal",
-      "email": "khandekarkajal123@gmail.com",
-      "password": "scscs"
-    },
-    {
-      "id": "048a",
-      "name": "kajal",
-      "email": "khandekarkajal123@gmail.com",
-      "password": "scscs",
-      "role": "user"
-    },
-    {
-      "id": "b90b",
-      "name": "kajal",
-      "email": "khandekarkajal123@gmail.com",
-      "password": "scscs"
-    },
-    {
-      "id": "4557",
-      "name": "kajal",
-      "email": "khandekarkajal123@gmail.com",
-      "password": "scscs"
-    },
-    {
-      "id": "8520",
-      "role": "user"
-    },
-    {
-      "id": "f368",
-      "Username": "mahesh",
-      "email": "mahesh@gmail.com",
-      "password": "mahesh17",
+      "id": "6ce5",
+      "name": "suresh",
+      "email": "suresh@gmail.com",
+      "password": "123456",
       "role": "user"
     }
   ],
@@ -95,23 +41,12 @@
       "type": "Organic"
     },
     {
-      "id": "2",
-      "name": "Mango",
-      "image": "mango.jpg",
-      "unit": "doz",
-      "mrp": 500,
-      "discount": 8,
-      "inStock": true,
-      "qty": 0,
-      "type": "Organic"
-    },
-    {
       "id": "3",
       "name": "Banana",
       "image": "banana.jpg",
       "unit": "doz",
       "mrp": 60,
-      "discount": 0,
+      "discount": "10",
       "inStock": true,
       "qty": 0,
       "type": "Non-Organic"
@@ -122,7 +57,7 @@
       "image": "apple.jpg",
       "unit": "kg",
       "mrp": 180,
-      "discount": 7,
+      "discount": "3",
       "inStock": true,
       "qty": 0,
       "type": "Non-Organic"
@@ -291,6 +226,25 @@
       "inStock": true,
       "qty": 0,
       "type": "Non-Organic"
+    },
+    {
+      "id": "ba79",
+      "name": "kiwi",
+      "mrp": "1000",
+      "discount": "6"
+    },
+    {
+      "id": "6cd6",
+      "name": "guava",
+      "mrp": "100",
+      "discount": "2",
+      "Qty": ""
+    },
+    {
+      "id": "1335",
+      "name": "kiwi",
+      "mrp": "1000",
+      "discount": "6"
     }
   ]
 }

@@ -5,8 +5,6 @@ import NavBar from "./NavBar";
 
 export default function SignUpPage(props) {
   let { signupstatus } = props;
-
-
   function handleSignUpFormSubmit(event) {
     event.preventDefault();
     props.onSignUpFormSubmit(event);
@@ -18,7 +16,18 @@ export default function SignUpPage(props) {
   return (
     <>
       {/* {(display =false  && <Page  />)}  */}
+      <div className="my-5  p-3 "></div>
+      {signupstatus == "failed" && (
+        <>
+         
+        <div className="text-center  h5 text-white ">
+          Sorry.. This Email-id is already Registered.
+        </div>
+        </>
+      )}
       {signupstatus == "success" && (
+        <>
+         <div className="my-5 p-5 "></div>
         <div className="text-center h3 text-danger">
           Signup Successfull{" "}
           <a href="#" onClick={handleLoginClick}>
@@ -26,18 +35,15 @@ export default function SignUpPage(props) {
           </a>{" "}
           now.
         </div>
+        </>
       )}
-      {signupstatus == "failed" && (
-        <div className="text-center pb-3 h5 text-danger">
-          Sorry.. This Email-id is already Registered.
-        </div>
-      )}
+      
       
       
       
       {(signupstatus == "no" || signupstatus == "failed") && (
-        <div className="p-3  bgc">
-          <div className="text-center p-5   text-white h4 my-3">
+        <div className="p-3   ">
+          <div className="text-center p-3 my-5  text-white h4 ">
             SIGNUP PAGE
           </div>
           <div className="row p justify-content-center">
@@ -46,7 +52,7 @@ export default function SignUpPage(props) {
                 <div className="row    ">
                   <div className="col-6 p-2  h4 my-2 text-end text-white"><label htmlFor="">UserName:</label></div>
                   <div className="col-6 p-2">
-                    <input type="name" name="Username" required />
+                    <input type="name" name="name" required />
                   </div>{" "}
                   <div className="col-6 p-2  h4 text-end text-white"><label htmlFor="">Email:</label></div>
                   <div className="col-6 p-2 ">
@@ -95,7 +101,7 @@ export default function SignUpPage(props) {
           </div>
         </div>
       )}
-      <div className="bgc size "></div>
+      {/* <div className="bgc size "></div> */}
       
     </>
   

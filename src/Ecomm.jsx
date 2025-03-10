@@ -4,17 +4,24 @@ import NavBar from "./NavBar";
 import SignUpPage from "./SignUpPage";
 import Login from "./Login";
 import axios from "axios";
+import AdminProductForm from "./AdminProductForm";
+import AdminProductPage from "./AdminProductPage";
+import CartItem from "./CartItem";
+import Bill from "./Bill";
+import { BeatLoader } from "react-spinners";
+
 // import CartPageItems from "./CartPageItems";
 
 export default function Ecommerce() {
-  useEffect(() => {
-    getDataFromServer();
-  }, []);
+  // useEffect(() => {
+  //   getDataFromServer();
+  // }, []);
   let [view, setView] = useState("productPage");
   let [cnt, setCnt] = useState(0);
   let [cartItems, setCartItems] = useState([]);
   let [totalprice, setTotalPrice] = useState(0);
   let [successmessage, setSuccessMessage] = useState(false);
+  let [flagLoader, setFlagLoader] = useState(false);
 
   // let pList = [
   //   {
@@ -216,12 +223,34 @@ export default function Ecommerce() {
   let [message, setMessage] = useState("");
   let [target, setTarget] = useState("");
   let [user, setUser] = useState("");
-    async function getDataFromServer(){
-    let info =await axios.get("http://localhost:3000/fruits");
-    setProductList(info.data)
-   }
+  let [name, setName] = useState("");
+  async function getDataFromServer() {
+    setFlagLoader(true);
+    let info = await axios.get("http://localhost:3000/fruits");
+    setProductList(info.data);
+    setFlagLoader(false);
+  }
+  useEffect(() => {
+    getDataFromServer();
+    let storedUser = localStorage.getItem("user");
+    let storedTotalPrice = localStorage.getItem("cartItems");
+    let storedLoginStatus = localStorage.getItem("cartItems");
+    let storedCart = localStorage.getItem("cartItems");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setLoginStatus(storedLoginStatus || "no");
+    }
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
+      setCnt(JSON.parse(storedCart).length);
+    }
 
-   function handleSignUpFormSubmit(event) {
+    if (storedTotalPrice) {
+      setTotalPrice(parseFloat(storedTotalPrice));
+    }
+  }, []);
+
+  function handleSignUpFormSubmit(event) {
     let formData = new FormData(event.target);
     let user = {};
     for (let data of formData) {
@@ -238,8 +267,15 @@ export default function Ecommerce() {
     let filteredData = data.filter((e, index) => e.email == user.email);
     if (filteredData.length >= 1) {
       console.log("Already Exists");
+      setTimeout(() => {
+        setSignupStatus("");
+        setView("productPage");
+      }, 2000);
       setSignupStatus("failed");
-      setMessage("Sorry... This email-id is already registered.");
+      // setTimeout(() => {
+      //   setMessage("Sorry... This email-id is already registered.");
+
+      // }, 1000);
     } else {
       console.log("new user");
       addUser(user);
@@ -254,35 +290,46 @@ export default function Ecommerce() {
   //Login Operation
   function handleLoginFormSubmit(event) {
     let formData = new FormData(event.target);
-    let user = {};
+    let userData = {};
     for (let data of formData) {
-      user[data[0]] = data[1];
+      userData[data[0]] = data[1];
     }
     console.log("ok");
-    console.log(user);
-    setUser(user);
+    console.log(userData);
 
-    checkUser(user);
+    checkUser(userData);
 
-    async function checkUser(props) {
+    async function checkUser(userData) {
       let response = await axios("http://localhost:3000/users");
       let data = await response.data;
       let filteredData = data.filter(
-        (e, index) => e.email == user.email && e.password == user.password
+        (e, index) =>
+          e.email == userData.email && e.password == userData.password
       );
       if (filteredData.length == 1) {
         setLoginStatus("success");
+
         setUser(filteredData[0]);
+        let u = filteredData[0];
+        localStorage.setItem("user", JSON.stringify(filteredData[0]));
+        localStorage.setItem("loginStatus", "suceess");
+        if (u.role == "user") {
+          setLoginStatus("success");
+          setTimeout(() => {
+            setName(u.name);
+
+            setView("productPage");
+          }, 2000);
+        } else if (u.role == "admin") {
+          setLoginStatus("success");
+          setTimeout(() => {
+            setName(u.name);
+            setView("admin");
+          }, 2000);
+        }
+
         // addDataToServer(user)
         setSuccessMessage(true);
-
-        setTimeout(() => {
-          setSuccessMessage(false);
-          console.log("Login Successful");
-          setTimeout(() => {
-            setView("productPage");
-          }, 1000);
-        }, 1000);
       } else {
         setLoginStatus("failed");
       }
@@ -290,9 +337,17 @@ export default function Ecommerce() {
   }
 
   function handleCartItems(view) {
-    console.log("Cart button clicked");
-    setView("cart");
-    console.log(cartItems.length);
+    if (cnt <= 0 && totalprice <= 0) {
+      setView("no_element");
+    } else if (!user) {
+      setMessage("you have to  login first!");
+      setTimeout(() => {
+        setMessage("");
+        setView("Login");
+      }, 1000);
+    } else {
+      setView("cart");
+    }
   }
 
   //Handle Add to cart operation
@@ -311,7 +366,7 @@ export default function Ecommerce() {
 
       setCartItems([...cartItems, newProduct]);
       setTotalPrice(
-        totalprice + newProduct.mrp * (1 - newProduct.discount / 100)
+        totalprice + newProduct.mrp * (1 - newProduct.discount / 100).toFixed(1)
       );
     }
     let updatedCart;
@@ -338,7 +393,7 @@ export default function Ecommerce() {
     );
     setCartItems(updatedCart);
 
-    setTotalPrice(totalprice + p.mrp * (1 - p.discount / 100));
+    setTotalPrice(totalprice + p.mrp * (1 - p.discount / 100).toFixed(1));
     console.log(updatedCart);
   }
   //Handle "-"
@@ -368,7 +423,7 @@ export default function Ecommerce() {
     if (updatedCart.length === 0) {
       setTotalPrice(0);
     } else {
-      setTotalPrice(totalprice - p.mrp * (1 - p.discount / 100));
+      setTotalPrice(totalprice - p.mrp * (1 - p.discount / 100).toFixed(1));
     }
     console.log(updatedCart);
   }
@@ -387,6 +442,8 @@ export default function Ecommerce() {
     setLoginStatus("no"); // Reset login status
     setSignupStatus("no"); // Reset signup status (if needed)
     setMessage(""); // Clear any messages
+    localStorage.removeItem("user");
+    localStorage.removeItem("loginStatus");
 
     //  setView("Login");
   }
@@ -396,54 +453,190 @@ export default function Ecommerce() {
     setView(event);
     // setView("product");
     console.log(view);
+    clearMessege();
   }
- 
+  function handleProductAddEditFormSubmit(list) {
+    setProductList(list);
+  }
+  function handleDeleteButtonClick(p, flag) {
+    let response = axios.delete("http://localhost:3000/fruits");
+  }
+  function handleStartButtonClick() {
+    setView("productPage");
+  }
+  function handleDeleteButtonClick(p, flag) {
+    if (flag) {
+      deleteProductFormServer(p);
+    } else {
+      setMessage("Delete Operation Cancelled");
+      clearMessege();
+    }
+  }
+  async function deleteProductFormServer(p) {
+    let response = await axios.delete("http://localhost:3000/fruits/" + p.id);
+
+    let list = productList.filter((e, index) => e.id != p.id);
+    console.log("list in delete ecom");
+    console.log(list);
+    setProductList(list);
+    setMessage(`Product -${p.name} deleted successfully`);
+    clearMessege();
+  }
+  function clearMessege() {
+    setTimeout(() => {
+      setMessage("");
+    }, 1000);
+  }
+  function handleBackButtonClick() {
+    setView("productPage");
+  }
+  function handleBuyButtonClick() {
+    setView("bill");
+  }
+
+  function handleChangeButtonClick(op, f) {
+    //console.log(op);
+    let p = [...productList];
+    let cItems = [...cartItems];
+    let index = f.indexOf(f);
+    if (op == "+") {
+      p[index].qty = p[index].qty + 1;
+      cItems = cItems.map((e) => {
+        if (e.id == f.id) return f;
+        else return e;
+      });
+      setCartItems(cItems);
+    } else if (op == "-") {
+      p[index].qty = p[index].qty - 1;
+      if (p[index].qty == 0) {
+        setCnt(cnt - 1);
+        cItems = cItems.filter((e) => e.id != f.id);
+        setCartItems(cItems);
+      }
+    } else if (op == "addtocart") {
+      p[index].qty = 1;
+      setCnt(cnt + 1);
+      cItems.push(f);
+      //setCartItems(product);
+      setCartItems(cItems);
+    }
+    calculateTotal(p);
+    setProductList(p);
+  }
+  function calculateTotal(p) {
+    let total = 0;
+    p.forEach((e, index) => {
+      total += e.finalprice * e.qty;
+    });
+    setTotalPrice(total);
+  }
+  if (flagLoader) {
+    return <BeatLoader size={30} color={"black"} className=" text-center" />;
+  }
   return (
     <>
-      <NavBar
-      onFormButtonClick={handleFormButtonClick}
-      onCartItems={handleCartItems}
-      cnt={cnt}
-      totalprice={totalprice}
-      cItems={cartItems}
-      user={user}
-      onLogoutClick={handleLogoutClick}
-      ></NavBar>
+      <div className=" col-sm-12 col-md-6 col-lg-12">
+        <NavBar
+          onFormButtonClick={handleFormButtonClick}
+          onCartItems={handleCartItems}
+          cnt={cnt}
+          totalprice={totalprice}
+          cItems={cartItems}
+          user={user}
+          name={name}
+          loginStatus={loginStatus}
+          onLogoutClick={handleLogoutClick}
+        ></NavBar>
+      </div>
       <div className="  colour">
         {view == "productPage" && (
-          <ProductPage
-            productList={productList}
-           onFormButtonClick={handleFormButtonClick}
-            onAddToCartButtonClick={handleAddToCartButtonClick}
-            onIncrementButtonClick={handleIncrementButtonClick}
-            onDecrementButtonClick={handleDecrementButtonClick}
-          ></ProductPage>
+          <div>
+            <ProductPage
+              productList={productList}
+              onFormButtonClick={handleFormButtonClick}
+              onAddToCartButtonClick={handleAddToCartButtonClick}
+              onIncrementButtonClick={handleIncrementButtonClick}
+              onDecrementButtonClick={handleDecrementButtonClick}
+              onChangeButtonClick={handleChangeButtonClick}
+            ></ProductPage>
+          </div>
         )}
-       {view == "Login" && (
-          <Login
-            onClick={handleFormButtonClick}
-            loginStatus={loginStatus}
-            onLoginFormSubmit={handleLoginFormSubmit}
-            user={user}
-            view={view}
-            onLoginClick={handleLoginClick}
-          />
+        {view == "Login" && (
+          <div className="bgc vh-100">
+            <Login
+              onClick={handleFormButtonClick}
+              loginStatus={loginStatus}
+              onLoginFormSubmit={handleLoginFormSubmit}
+              user={user}
+              view={view}
+              onLoginClick={handleLoginClick}
+            />
+          </div>
         )}
         {view == "SignUp" && (
-          <SignUpPage
-            onFormButtonClick={handleFormButtonClick}
-            onSignUpFormSubmit={handleSignUpFormSubmit}
-            view={view}
-            signupstatus={signupstatus}
-            onLoginClick={handleLoginClick}
-
-            // users={user}
-            // onChange={checkUser}
-          />
+          <div className="bgc vh-100">
+            <SignUpPage
+              onFormButtonClick={handleFormButtonClick}
+              onSignUpFormSubmit={handleSignUpFormSubmit}
+              view={view}
+              signupstatus={signupstatus}
+              onLoginClick={handleLoginClick}
+              // users={user}
+              // onChange={checkUser}
+            />
+          </div>
         )}
-        {/* {view == "cart" && (
-          <CartPageItems onCartItems={handleCartItems} cartItems={cartItems} />
-        )} */}
+        {view == "cart" && (
+          <div className="bgc vh-100 ">
+            <CartItem
+              onCartItems={handleCartItems}
+              cartItems={cartItems}
+              onBuyButtonClick={handleBuyButtonClick}
+              onBackButtonClick={handleBackButtonClick}
+              onStartButtonClick={handleStartButtonClick}
+              onChangeButtonClick={handleChangeButtonClick}
+              onDecrementButtonClick={handleDecrementButtonClick}
+              onIncrementButtonClick={handleIncrementButtonClick}
+            />
+          </div>
+        )}
+
+        {view == "bill" && (
+          <div className="bgc  vh-100">
+            <Bill
+              // onChangeButtonClick={handleChangeButtonClick}
+              totalprice={totalprice}
+              name={name}
+              cartItems={cartItems}
+            />
+          </div>
+        )}
+
+        {view == "no_element" && (
+          <div className="my-5 p-5 vh-100 bgc col-lg-12 col-sm-12 col-md-6 ">
+            <div className="text-center  text-white my-5 h4 ">
+              Cart is Empty.{" "}
+              <a href="#" onClick={handleStartButtonClick}>
+                Start
+              </a>{" "}
+              Shopping.
+            </div>
+          </div>
+        )}
+
+        {view == "admin" && (
+          <div className=" col-lg-12 col-12 col-sm-12 col-md-6 bgc vh-100">
+            <AdminProductPage
+              productList={productList}
+              view={view}
+              // onProductEditFormSubmit={handleProductAddEditFormSubmit}
+              // onProductAddFormSubmit={handleProductAddEditFormSubmit}
+              onDeleteButtonClick={handleDeleteButtonClick}
+              onProductEditFormSubmit={handleProductAddEditFormSubmit}
+              onProductAddFormSubmit={handleProductAddEditFormSubmit}
+            />
+          </div>
+        )}
       </div>
     </>
   );
