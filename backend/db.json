@@ -226,25 +226,6 @@
       "inStock": true,
       "qty": 0,
       "type": "Non-Organic"
-    },
-    {
-      "id": "ba79",
-      "name": "kiwi",
-      "mrp": "1000",
-      "discount": "6"
-    },
-    {
-      "id": "6cd6",
-      "name": "guava",
-      "mrp": "100",
-      "discount": "2",
-      "Qty": ""
-    },
-    {
-      "id": "1335",
-      "name": "kiwi",
-      "mrp": "1000",
-      "discount": "6"
     }
   ]
 }
