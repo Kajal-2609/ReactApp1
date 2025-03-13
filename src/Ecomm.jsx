@@ -9,6 +9,7 @@ import AdminProductPage from "./AdminProductPage";
 import CartItem from "./CartItem";
 import Bill from "./Bill";
 import { BeatLoader } from "react-spinners";
+import { deleteBackendProduct, getProductFromBackend } from "./Firebaseproductservices";
 
 // import CartPageItems from "./CartPageItems";
 
@@ -224,11 +225,19 @@ export default function Ecommerce() {
   let [target, setTarget] = useState("");
   let [user, setUser] = useState("");
   let [name, setName] = useState("");
+
   async function getDataFromServer() {
     setFlagLoader(true);
-    let info = await axios.get("http://localhost:3000/fruits");
-    setProductList(info.data);
+    let list=await getProductFromBackend();
+    // let info = await axios.get("http://localhost:3000/fruits");
+    // setProductList(info.data);
     setFlagLoader(false);
+    list= list.map((e,index)=>{
+      e.qty=0;
+      return e;
+    })
+    setProductList(list);
+    
   }
   useEffect(() => {
     getDataFromServer();
@@ -458,9 +467,9 @@ export default function Ecommerce() {
   function handleProductAddEditFormSubmit(list) {
     setProductList(list);
   }
-  function handleDeleteButtonClick(p, flag) {
-    let response = axios.delete("http://localhost:3000/fruits");
-  }
+  // function handleDeleteButtonClick(p, flag) {
+  //   let response = axios.delete("http://localhost:3000/fruits");
+  // }
   function handleStartButtonClick() {
     setView("productPage");
   }
@@ -473,9 +482,10 @@ export default function Ecommerce() {
     }
   }
   async function deleteProductFormServer(p) {
-    let response = await axios.delete("http://localhost:3000/fruits/" + p.id);
+    // let response = await axios.delete("http://localhost:3000/fruits/" + p.id);
+    
 
-    let list = productList.filter((e, index) => e.id != p.id);
+    let list = await deleteBackendProduct(p)
     console.log("list in delete ecom");
     console.log(list);
     setProductList(list);
@@ -487,6 +497,7 @@ export default function Ecommerce() {
       setMessage("");
     }, 1000);
   }
+  // productList.filter((e, index) => e.id != p.id);
   function handleBackButtonClick() {
     setView("productPage");
   }

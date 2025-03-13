@@ -8,7 +8,7 @@ export default function NavBar(props) {
   let { view } = props;
   let { user } = props;
   let {loginStatus}=props;
-  function handleFormButtonClick(view) {
+  function handleFormButtonClick(view) {                                                                                                                                                                                                                                                                                          
     console.log("login clicked");
     props.onFormButtonClick(view);
   }

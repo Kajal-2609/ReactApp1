@@ -89,7 +89,8 @@ export default function AdminProductPage(props) {
             selectedProduct={selectedProduct}
             onProductListClick={handleProductListClick}
             adminView={adminView}
-            onProductAddEditFormSubmit={handleProductAddEditFormSubmit}
+            onProductAddFormSubmit={handleProductAddEditFormSubmit}
+            onProductEditFormSubmit={handleProductAddEditFormSubmit}
 
             // onProductListFormSubmit={handleProductAddEditFormSubmit}
             // onProductAddFormSubmit={handleProductAddEditFormSubmit}
