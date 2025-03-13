@@ -167,7 +167,7 @@ img {
   }
 }
 .bgc {
-  background: url(download.jpg) no-repeat center fixed  ;
+  background: url(/public/download.jpg) no-repeat center fixed  ;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
