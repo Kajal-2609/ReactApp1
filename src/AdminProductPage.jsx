@@ -67,7 +67,7 @@ export default function AdminProductPage(props) {
       )}
 
       {adminView == "list" && (
-        <div className="row text-center  p-3     ">
+        <div className="row text-center  p-3  col-12 col-lg-10  ">
           {productList.map((e, index) => (
             <AdminProduct
               p={e}
@@ -82,7 +82,7 @@ export default function AdminProductPage(props) {
         </div>
       )}
       {(adminView == "edit" || adminView == "add") && (
-        <div className="text-white  ">
+        <div className=" text-black">
           {" "}
           <AdminProductForm
             productList={productList}

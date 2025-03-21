@@ -26,6 +26,13 @@
       "email": "suresh@gmail.com",
       "password": "123456",
       "role": "user"
+    },
+    {
+      "id": "e6cf",
+      "name": "swapnil",
+      "email": "swapnil@gmail.com",
+      "password": "1234",
+      "role": "user"
     }
   ],
   "fruits": [

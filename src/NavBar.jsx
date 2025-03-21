@@ -1,14 +1,16 @@
 import React from "react";
+import { getAuth } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 
 export default function NavBar(props) {
   let { cnt } = props;
-  let {name}=props;
+  let { name } = props;
   let { cartItems } = props;
   let { totalprice } = props;
   let { view } = props;
   let { user } = props;
-  let {loginStatus}=props;
-  function handleFormButtonClick(view) {                                                                                                                                                                                                                                                                                          
+  let { loginStatus } = props;
+  function handleFormButtonClick(view) {
     console.log("login clicked");
     props.onFormButtonClick(view);
   }
@@ -26,9 +28,12 @@ export default function NavBar(props) {
   function handleCartItems() {
     props.onCartItems(view);
   }
+  function handleLoginButtonClickUsingGoogle() {
+    props.onLoginButtonClickUsingGoogle();
+  }
   return (
     <>
-      <div className=" row fixed-top  bgi   align-items-center justify-content-around border-bottom border-4 border-black  bg    ">
+      <div className=" row fixed-top  bgi   align-items-center justify-content-around border-bottom border-4 border-black      ">
         <div
           className="col-4  col-lg-2  text-center "
           id=" logo"
@@ -40,9 +45,23 @@ export default function NavBar(props) {
             alt=""
           />
         </div>
-        <div className="col-5 col-lg-3 col-sm-6 col-md-12 text-center  ">
-          { loginStatus=="success"&&<div className="text-white h5">Welcome {name} !</div>}
-          {user ? (
+        <div className="col-5 col-lg-5 col-sm-6 col-md-12 text-center  ">
+          {loginStatus == "success" && (
+            <div className="text-white h5">Welcome {user.name} !</div>
+          )}
+          {user && (
+           <div className="col-3 col-lg-12 text-center ">
+             <button
+                  className="  login"
+                  onClick={handleLoginButtonClickUsingGoogle}
+                >
+                   Google Login
+                </button>
+           </div>
+         
+          )}
+
+          {/* {user ? (
             <>
               <div className=" p-2 name">
                 {" "}
@@ -71,11 +90,14 @@ export default function NavBar(props) {
                 Login
               </button>
             </>
-          )}
+          )} */}
         </div>
         <div className=" col-lg-1  col-3   text-black  cart   ">
           <div className="">
-            <button className="cart-container radius " onClick={handleCartItems}>
+            <button
+              className="cart-container radius "
+              onClick={handleCartItems}
+            >
               <i className=" bi-cart2  fs-1">
                 {cnt}
                 <div className="h6 text-center ">Rs.{totalprice}</div>

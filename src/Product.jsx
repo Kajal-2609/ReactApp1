@@ -19,31 +19,30 @@ export default function Product(props) {
   }
   return (
     <>
-      <div className="col-12 col-lg-3 p-3  ">
-        <div className=" radius   bg-opacity-75  bg-body box myb p-2">
+      <div className="col-12 col-lg-2 p-3  ">
+        <div className=" radius   boxbg box  bg-opacity-75 bg-body p-2">
           <div className="p-2">
             <div className=" position-absolute col-lg-2 myb col-5  radiu  md">
               {p.discount > 0 ? "" + p.discount + "% discount" : " "}
             </div>
             <img className=" img-fluid  " src={p.image} alt="" />
           </div>
-          <div className="h3">
+          <div className="h5">
             {p.name}-{p.discount > 0 ? "-(" + p.discount + "%)" : ""}
           </div>
-          {p.discount == 0 && <h3>Rs.{p.mrp}</h3>}
+          {p.discount == 0 && <h5>Rs.{p.mrp}</h5>}
           {p.discount != 0 && (
-            <h3>
+            <h5 className="">
               Rs. <span className="text-decoration-line-through">{p.mrp}</span>{" "}
               {finalprice}
-            </h3>
+            </h5>
           )}
-
-          <div className="text-center ">
+           <div className="text-center  ">
             {p.qty == 0 && (
               <button
-                className="btn login text text-black  myb"
-                disabled={!p.inStock}                       
-                onClick={handleAddToCartButtonClick}       
+                className="btn login text text-black  "
+                disabled={!p.inStock}
+                onClick={handleAddToCartButtonClick}
               >
                 {p.inStock ? "Add to Cart" : "out of stock"}
               </button>
@@ -51,21 +50,21 @@ export default function Product(props) {
 
             {p.qty != 0 && (
               <div className="row">
-                <div className="col-4">
+                <div className="col-4 col-lg-2 ps-lg-2 my-lg-0 ">
                   <button
-                    className="btn bsize  myb plusminusb "
+                    className="btn bsize    plusminusb "
                     id="-"
                     onClick={handleDecrementButtonClick}
                   >
                     -
                   </button>{" "}
                 </div>
-                <div className="col-4  h7">
+                <div className="col-4 col-lg-8 ps-lg-0     pt-0 h9">
                   qty: {p.qty} {p.qty != 0 ? ` Rs. ${displayprice}` : " "}
                 </div>
-                <div className="col-4">
+                <div className="col-4 col-lg-2 ps-lg-0">
                   <button
-                    className="btn bsize plusminusb "
+                    className="btn bsize text-center plusminusb "
                     id="+"
                     onClick={handleIncrementButtonClick}
                   >

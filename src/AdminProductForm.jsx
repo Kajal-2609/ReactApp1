@@ -323,18 +323,18 @@ export default function AdminProductForm(props) {
         </div>
       )}
       {adminView == "add" && (
-        <div className="text-center text-danger my-3">Add the new product</div>
+        <div className="text-center text-white my-3">Add the new product</div>
       )}
       <div className="row justify-content-center">
-        <div className="col-sm-12 col-md-6  border border-3 border-danger">
+        <div className="col-sm-12 col-md-6  p-5">
           <form
             className="product-form"
             onSubmit={(event) => {
               handleProductAddEditFormSubmit(event);
             }}
           >
-            <div className="row">
-              <div className="col-4 col-sm-6 my-2 text-end">Name</div>
+            <div className="row ">
+              <div className="col-4 col-sm-6 my-2 text-end ">Name</div>
               <div className="col-6 my-2  text-start">
                 <input
                   type="text"
@@ -441,13 +441,13 @@ export default function AdminProductForm(props) {
               <div className="col-sm-4 col-6  my-2 text-end"></div>
               <div className="col-6 my-2">
                 <input
-                  className="btn btn-danger"
+                  className="login"
                   type="submit"
                   value="Submit"
                   disabled={flagFormInvalid}
                 />{" "}
                 <button
-                  className="btn btn-danger"
+                  className="login"
                   onClick={handleProductListClick}
                 >
                   Cancel{" "}

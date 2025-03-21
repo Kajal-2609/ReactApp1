@@ -36,7 +36,7 @@ export default function CartItem(props) {
 
   return (
     <>
-      <div className="my-5 p-5 "></div>
+      <div className="my-5 p-3 "></div>
 
       <div className="mb-1 p-2 text-white  text-center">
         Proceed to{" "}
@@ -59,20 +59,20 @@ export default function CartItem(props) {
         {cartItems.map((p, index) => {
           return (
             // <div key={index} className="mx-auto border border-black m-2 ll">
-            <div className="m-2 p-2 border border-white  adminform ll">
+            <div className="m-2 p-2 border border-black adminform  bg-opacity-75 bg-body">
               <div className="row ">
-                <div className="col-6 text-start ps-5 text-white col-6 col-lg-6 ">{`${
+                <div className="col-6 text-start ps-5 text-black col-6 col-lg-6 ">{`${
                   index + 1
                 })  ${p.name}`}</div>
-                <div className="col-6 text-end pe-5  text-white col-6 col-lg-6 ">
+                <div className="col-6 text-end pe-5  text-black col-6 col-lg-6 ">
                   {p.discount == 0 && <h4>Rs. {p.mrp * p.qty}</h4>}
                   {p.discount != 0 && (
                     <h4>
                       Rs.{" "}
-                      <span className="text-decoration-line-through text-white">
+                      <span className="text-decoration-line-through text-black">
                         {p.mrp}{" "}
                       </span>{" "}
-                      <span className="text-info ">
+                      <span className="text-danger ">
                         {(p.mrp - p.mrp * (p.discount / 100).toFixed(1)) *
                           p.qty}
                       </span>
@@ -83,16 +83,16 @@ export default function CartItem(props) {
               <div className="row ">
                 <div className="col-6 text-start ps-5  col-12 ">
                   <button
-                    className="minusbutton me-4 btn btn-danger "
+                    className="  plusminusb me-4 login bsize "
                     onClick={() => {
                       handleDecrementButtonClick(p);
                     }}
                   >
                     -
                   </button>
-                  <h7 className="text-white">{p.qty}</h7>
+                  <h7 className="text-black">{p.qty}</h7>
                   <button
-                    className="plusbutton ms-4 btn btn-success "
+                    className=" bsize ms-4  plusminusb login "
                     onClick={() => {
                       handleIncrementButtonClick(p);
                     }}

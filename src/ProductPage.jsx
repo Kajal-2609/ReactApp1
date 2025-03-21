@@ -23,8 +23,8 @@ export default function ProductPage(props) {
   return (
     <>
       {/* <div className="imp"><img src="/images.jpg" alt="" /></div> */}
-      <div className="my-2 p-1"></div>
-      <div className="row text-center box bgc vw-100">
+      <div className="my-5 p-1"></div>
+      <div className="row text-center box  bg">
         {productList.map((e, index) => (
           <Product
             p={e}
@@ -38,7 +38,7 @@ export default function ProductPage(props) {
           />
         ))}
       </div>
-
+ 
     </>
   );
 }

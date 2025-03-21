@@ -3,10 +3,10 @@ body {
   font-size: 18px;
 }
 .myb {
-  border: 5px solid black;
+   border: 3px solid black; 
 }
 .radius {
-  border-radius: 30px;
+  border-radius: 20px;
 }
 img {
   border-radius: 20px;
@@ -126,9 +126,8 @@ img {
   color: #ffffff;
 
   font-family: Phantomsans, sans-serif;
-  font-size: 15px;
-
-  max-width: 40px;
+  font-size: 10px;
+  max-width: 25px;
 
   padding: auto;
   text-decoration: none;
@@ -143,12 +142,13 @@ img {
 
 .bsize:active,
 .bsize:hover {
-  outline: 0;
+ outline: 0;
 }
 
 .bsize {
   background-color: rgb(5, 6, 45);
-  padding: 10px;
+  padding-left: 1px;
+  padding-right: 1px;
   border-radius: 6px;
   width: 10px;
 
@@ -162,12 +162,12 @@ img {
 @media (min-width: 768px) {
   .bsize {
     font-size: 15px;
-    min-width: 20px;
+    min-width: 10px;
     text-align: center;
   }
 }
 .bgc {
-  background: url(/public/download.jpg) no-repeat center fixed  ;
+  background: url(download.jpg) no-repeat center fixed  ;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -177,11 +177,18 @@ img {
 .box {
   padding: 10px;
   margin-top: 50px;
+  height: max-content;
 
   /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
 }
+.boxbg{
+  /* background-color:rgb(252, 165, 240); */
+
+}
 .plusminusb {
   width: 30px;
+  height: 30px;
+  
 }
 .cart {
   /* width: fit-content; */
@@ -193,18 +200,27 @@ img {
 }
 .bgi {
   /* background-image: url(/frimg.jfif);  */
-  background-image: url(/backi.jpg);
-  filter: brightness(100%);
+  /* background-image: url(/backi.jpg);
+  filter: brightness(100%); */
 
   /* -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;   */
+  background: linear-gradient(
+    to bottom right,
+    hsla(203, 92%, 75.5%, 0.25),
+    rebeccapurple,
+    hsla(27.6, 87.1%, 66.7%, 0.25)
+  );
+}
+.bg{
+  background-image: linear-gradient(to right, #ec77ab 0%, #7873f5 100%);
 }
 .logobr {
   border-radius: 100%;
   border: rgb(7, 4, 4);
-  padding: 8px;
+  padding: 10px;
   background-color: #5b42f3;
 }
 
@@ -215,8 +231,9 @@ img {
   font-style: italic;
 }
 .billbox {
-  border: 7px solid white;
+  border: 7px solid black;
   border-style: double;
+  
 }
 
 @media screen and (max-width: 576px) {

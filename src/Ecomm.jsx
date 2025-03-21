@@ -10,6 +10,12 @@ import CartItem from "./CartItem";
 import Bill from "./Bill";
 import { BeatLoader } from "react-spinners";
 import { deleteBackendProduct, getProductFromBackend } from "./Firebaseproductservices";
+import { addUserToBackend, getUserFromBackend } from "./Firebaseuserservices";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
+// import { getAuth, GoogleAuthProvider } from "firebase/auth/web-extension";
+// import{signInWithPopup} from "firebase/auth"
+
 
 // import CartPageItems from "./CartPageItems";
 
@@ -225,7 +231,8 @@ export default function Ecommerce() {
   let [target, setTarget] = useState("");
   let [user, setUser] = useState("");
   let [name, setName] = useState("");
-
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
   async function getDataFromServer() {
     setFlagLoader(true);
     let list=await getProductFromBackend();
@@ -271,8 +278,9 @@ export default function Ecommerce() {
   }
 
   async function checkUserExists(user) {
-    let response = await axios("http://localhost:3000/users");
-    let data = await response.data;
+    // let response = await axios("http://localhost:3000/users");
+    let response=await getUserFromBackend()
+    let data =response;
     let filteredData = data.filter((e, index) => e.email == user.email);
     if (filteredData.length >= 1) {
       console.log("Already Exists");
@@ -292,7 +300,9 @@ export default function Ecommerce() {
     }
   }
   async function addUser(user) {
-    let response = await axios.post("http://localhost:3000/users", user);
+    // let response = await axios.post("http://localhost:3000/users", user);
+    let response= await addUserToBackend(user)
+    setUser(response);
     setSignupStatus("success");
   }
 
@@ -309,8 +319,9 @@ export default function Ecommerce() {
     checkUser(userData);
 
     async function checkUser(userData) {
-      let response = await axios("http://localhost:3000/users");
-      let data = await response.data;
+      // let response = await axios("http://localhost:3000/users");
+      let userdata=await getUserFromBackend()
+      let data = userdata;
       let filteredData = data.filter(
         (e, index) =>
           e.email == userData.email && e.password == userData.password
@@ -544,6 +555,44 @@ export default function Ecommerce() {
   if (flagLoader) {
     return <BeatLoader size={30} color={"black"} className=" text-center" />;
   }
+  function handleLoginButtonClickUsingGoogle(){
+    signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+    let usr ={user};
+    usr.name=user.displayName;
+    usr.emailid=user.email;
+    if(usr.emailid=="khandekarkajal123@gmail.com")
+      {usr.role="admin"
+    setView("admin")
+    setLoginStatus("success")
+  }
+    else {
+      usr.role="user";
+      setView("productPage");
+    setLoginStatus("success")
+
+    }
+    setUser(usr)
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+
+
+  }
   return (
     <>
       <div className=" col-sm-12 col-md-6 col-lg-12">
@@ -557,11 +606,12 @@ export default function Ecommerce() {
           name={name}
           loginStatus={loginStatus}
           onLogoutClick={handleLogoutClick}
+          onLoginButtonClickUsingGoogle={handleLoginButtonClickUsingGoogle}
         ></NavBar>
       </div>
       <div className="  colour">
         {view == "productPage" && (
-          <div>
+          <div className=" ">
             <ProductPage
               productList={productList}
               onFormButtonClick={handleFormButtonClick}
@@ -573,7 +623,7 @@ export default function Ecommerce() {
           </div>
         )}
         {view == "Login" && (
-          <div className="bgc vh-100">
+          <div className="bg vh-100">
             <Login
               onClick={handleFormButtonClick}
               loginStatus={loginStatus}
@@ -585,7 +635,7 @@ export default function Ecommerce() {
           </div>
         )}
         {view == "SignUp" && (
-          <div className="bgc vh-100">
+          <div className="bg vh-100">
             <SignUpPage
               onFormButtonClick={handleFormButtonClick}
               onSignUpFormSubmit={handleSignUpFormSubmit}
@@ -598,7 +648,7 @@ export default function Ecommerce() {
           </div>
         )}
         {view == "cart" && (
-          <div className="bgc vh-100 ">
+          <div className="bg vh-100 ">
             <CartItem
               onCartItems={handleCartItems}
               cartItems={cartItems}
@@ -613,18 +663,19 @@ export default function Ecommerce() {
         )}
 
         {view == "bill" && (
-          <div className="bgc  vh-100">
+          <div className="bg vh-100 ">
             <Bill
               // onChangeButtonClick={handleChangeButtonClick}
               totalprice={totalprice}
               name={name}
               cartItems={cartItems}
+              user={user}
             />
           </div>
         )}
 
         {view == "no_element" && (
-          <div className="my-5 p-5 vh-100 bgc col-lg-12 col-sm-12 col-md-6 ">
+          <div className="my-5 p-5 vh-100 bg col-lg-12 col-sm-12 col-md-6 ">
             <div className="text-center  text-white my-5 h4 ">
               Cart is Empty.{" "}
               <a href="#" onClick={handleStartButtonClick}>
@@ -636,7 +687,7 @@ export default function Ecommerce() {
         )}
 
         {view == "admin" && (
-          <div className=" col-lg-12 col-12 col-sm-12 col-md-6 bgc vh-100">
+          <div className=" col-lg-12 col-12 col-sm-12 col-md-6 bg  ">
             <AdminProductPage
               productList={productList}
               view={view}
