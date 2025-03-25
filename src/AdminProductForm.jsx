@@ -300,7 +300,7 @@ export default function AdminProductForm(props) {
     return <BeatLoader size={24} color={"red"} />;
   }
   function handleSelectUnitChange(event) {
-    console.log(event.target.value);
+    console.log(event.target.value);1
     console.log(event.target.name);
     setProduct({ ...product, [event.target.name]: event.target.value });
   }

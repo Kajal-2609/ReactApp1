@@ -33,32 +33,35 @@ export default function AdminProduct(props) {
   }
   return (
     <>
-      <div className="col-12 col-lg-3 p-3 ">
-        <div className=" radius   bg-opacity-75  bg-body box myb p-2">
-          <div className="p-2">
-            <div className=" position-absolute radius  md">
-              {p.discount > 0 ? "" + p.discount + "% discount" : " "}
-            </div>
-            <img className=" img-fluid  " src={p.image} alt="" />
-          </div>
-          <div className="h3">
-            {p.name}-{p.discount > 0 ? "-(" + p.discount + "%)" : ""}
-          </div>
-          {p.discount == 0 && <h3>Rs.{p.mrp}</h3>}
-          {p.discount != 0 && (
-            <h3>
-              Rs. <span className="text-decoration-line-through">{p.mrp}</span>{" "}
-              {finalprice}
-            </h3>
-          )}
-          <div className="text-center m-3">
-            <button className="login  " onClick={handleEditButtonClick}>
-              <i class="bi bi-box-arrow-in-down-left"></i>
-            </button>{" "}
-            <button className=" login  m-1" onClick={handleDeleteButtonClick}>
-              <i class="bi bi-trash3"></i>
-            </button>
-          </div>
+      <div className="col-5 mx-2 text-lg-center m-lg-3 my-lg-5  p-lg-4  col-lg-2 b  radius   boxbg box  bg-opacity-75 bg-body">
+        <div className=" position-absolute radius  md">
+          {p.discount > 0 ? "" + p.discount + "% discount" : " "}
+        </div>
+        <img className=" img-fluid  " src={p.image} alt="" />
+
+        <div className="h5">
+          {p.name}{p.discount > 0 ? "(" + p.discount + "%)" : ""}
+        </div>
+        {p.discount == 0 && <h5>Rs.{p.mrp}</h5>}
+        {p.discount != 0 && (
+          <h5>
+            Rs. <span className="text-decoration-line-through">{p.mrp}</span>{" "}
+            {finalprice}
+          </h5>
+        )}
+        <div className="text-center m-3">
+          <button
+            className="login plusminusb bsize"
+            onClick={handleEditButtonClick}
+          >
+            <i class="bi bi-box-arrow-in-down-left"></i>
+          </button>{" "}
+          <button
+            className=" login plusminusb bsize m-1"
+            onClick={handleDeleteButtonClick}
+          >
+            <i class="bi bi-trash3"></i>
+          </button>
         </div>
       </div>
     </>

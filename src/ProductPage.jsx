@@ -23,8 +23,8 @@ export default function ProductPage(props) {
   return (
     <>
       {/* <div className="imp"><img src="/images.jpg" alt="" /></div> */}
-      <div className="my-5 p-1"></div>
-      <div className="row text-center box  bg">
+      <div className="my-3 p-1"></div>
+      <div className="row Contain text-center box  d-flex justify-content-center bg">
         {productList.map((e, index) => (
           <Product
             p={e}

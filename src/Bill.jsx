@@ -52,7 +52,7 @@ export default function Bill(props) {
   
             <div className="bill text-white  mycontainer mx-auto billbox text-center bg-opacity-75 bg-body"
             >
-              <div className=" mx-auto p-2 pb-1 text-black pt-2 my-auto h5   ">
+              <div className=" mx-auto p-2 pb-1 text-black pt-2 my-auto h5  ">
                 || Shree ||
               </div>
               <div className="h3 text-black"> KK Fruit Mart </div>

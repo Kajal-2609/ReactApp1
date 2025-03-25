@@ -58,7 +58,7 @@ export default function AdminProductPage(props) {
       {/* <div className="imp"><img src="/images.jpg" alt="" /></div> */}
       <div className="my-5 p-1"></div>
       {adminView == "list" && (
-        <div className="text-white p-3   text-center ">
+        <div className="text-white p-1   text-center ">
           <a href="#" className="h5" onClick={handleListButtonClick}>
             {" "}
             Add a product{" "}
@@ -67,7 +67,7 @@ export default function AdminProductPage(props) {
       )}
 
       {adminView == "list" && (
-        <div className="row text-center  p-3  col-12 col-lg-10  ">
+        <div className="row text-center  p-5 d-flex justify-content-center ">
           {productList.map((e, index) => (
             <AdminProduct
               p={e}
