@@ -1,62 +1,13 @@
-import { useState } from "react";
-import {
-  getBillsFromBackend,
-  addBillsToBackend,
-  updateBackendBills,
-} from "./Firebasebillservices";
-import { BeatLoader, RingLoader } from "react-spinners";
-export default function Bill(props) {
-  let { cartItems } = props;
-  let { price } = props;
-  let { name } = props;
-  let { totalprice } = props;
-  let { user } = props;
-  const phonenumber = "8799815906";
-
-  let [flagLoader, setFlagLoader] = useState(false);
+export default function Billpage(props) {
+  let { bill } = props;
   const currentDate = new Date().toLocaleDateString();
-  async function handleBillCreateClick() {
-    setFlagLoader(true);
-    let b = await getBillsFromBackend();
-
-    let currentBillNumber = b.lastbillnumber + 1;
-    let BillObj = {};
-    BillObj.billNumber = currentBillNumber;
-    BillObj.customer = user.name;
-    BillObj.date = new Date();
-    BillObj.amount = totalprice;
-    BillObj.soldProducts = cartItems;
-    BillObj = await addBillsToBackend(BillObj);
-    b.lastbillnumber = currentBillNumber;
-    await updateBackendBills(b);
-    let billId = BillObj.id;
-    console.log(billId);
-    setFlagLoader(false);
-    window.localStorage.setItem("cartItems", JSON.stringify([]));
-    let message = `I am ${name}.My Bill Number is ${currentBillNumber}.its link is ${window.location}?id=${billId}`;
-
-    window.location =
-      `https://api.whatsapp.com/send?phone=${phonenumber}&text=` + message;
-  }
-  if (flagLoader) {
-    return <RingLoader size={24} color={"red"} className="text-center" />;
-  }
-  //   function handleChangeButtonClick(op, e) {
-  //     props.onChangeButtonClick(op, e);
-  //   }
+  console.log("bill");
 
   return (
     <>
       <div className="my-5 p-5 "></div>
       {
-        <div className=" ">
-          <div className="text-center text-white">
-            <a href="#" onClick={handleBillCreateClick}>
-              Share
-            </a>{" "}
-            Bill on WhatsApp
-          </div>
-
+        <div className="row ">
           <div className="bill text-white  mycontainer mx-auto billbox text-center bg-opacity-75 bg-body">
             <div className=" mx-auto p-2 pb-1 text-black pt-2 my-auto h5  ">
               || Shree ||
@@ -69,7 +20,7 @@ export default function Bill(props) {
               Date: {currentDate}{" "}
             </div>
             <div className="h5 text-black ps-5">
-              Customer Name : {user.name}
+              Customer Name : {bill.customer}
             </div>
 
             <div className="row">
@@ -81,7 +32,7 @@ export default function Bill(props) {
               <div className="col-2 h5 text-black">Total</div>
             </div>
 
-            {cartItems.map((e, index) => {
+            {bill.map((e, index) => {
               return (
                 <div className="row ">
                   <div className="col-4 text-start ps-3 text-black">{`${
@@ -110,7 +61,7 @@ export default function Bill(props) {
 
             <div className="row">
               <div className="col-12 text-end h5 text-black pb-1">
-                Grand Total : Rs. {totalprice}
+                Grand Total : Rs. {bill.amount}
               </div>
               {/* <div className="col-2 text-start pe-5 h5 text-white">Rs. {totalprice} </div> */}
             </div>

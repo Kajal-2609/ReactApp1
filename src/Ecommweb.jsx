@@ -9,22 +9,13 @@ import AdminProductPage from "./AdminProductPage";
 import CartItem from "./CartItem";
 import Bill from "./Bill";
 import { BeatLoader } from "react-spinners";
-import {
-  deleteBackendProduct,
-  getProductFromBackend,
-} from "./Firebaseproductservices";
+import { deleteBackendProduct, getProductFromBackend } from "./Firebaseproductservices";
 import { addUserToBackend, getUserFromBackend } from "./Firebaseuserservices";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-} from "firebase/auth";
-import { importBackendDataToBill } from "./Firebasebillservices";
-import Billpage from "./Billpage";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 // import { getAuth, GoogleAuthProvider } from "firebase/auth/web-extension";
 // import{signInWithPopup} from "firebase/auth"
+
 
 // import CartPageItems from "./CartPageItems";
 
@@ -240,110 +231,56 @@ export default function Ecommerce() {
   let [target, setTarget] = useState("");
   let [user, setUser] = useState("");
   let [name, setName] = useState("");
-  let [bill, setbill] = useState("");
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-
-  // useEffect(() => {
-  //   getDataFromServer();
-  //   let storedUser = localStorage.getItem("user");
-  //   let storedTotalPrice = localStorage.getItem("cartItems");
-  //   let storedLoginStatus = localStorage.getItem("cartItems");
-  //   let storedCart = localStorage.getItem("cartItems");
-  //   if (storedUser) {
-  //     setUser(JSON.parse(storedUser));
-  //     setLoginStatus(storedLoginStatus || "no");
-  //   }
-  //   if (storedCart) {
-  //     setCartItems(JSON.parse(storedCart));
-  //     setCnt(JSON.parse(storedCart).length);
-  //   }
-
-  //   if (storedTotalPrice) {
-  //     setTotalPrice(parseFloat(storedTotalPrice));
-  //   }
-  // }, []);
-
-  // function handleSignUpFormSubmit(event) {
-  //   let formData = new FormData(event.target);
-  //   let user = {};
-  //   for (let data of formData) {
-  //     user[data[0]] = data[1];
-  //   }
-  //   user["role"] = "user";
-  //   console.log(user);
-  //   checkUserExists(user);
-  // }
-  useEffect(() => {
-    if (window.location.search == "") {
-      getDataFromServer();
-      // console.log("kajal");
-      
-    } else {
-      let param = new URLSearchParams(window.location.search);
-      let billId = param.get("id");
-      if (billId == null) {
-        setbill(null);
-        setTimeout(() => {
-          setMessage("invalid link");
-        }, 3000);
-        return;
-      } else {
-        console.log("got it");
-        getbill(billId);
-      }
-    }
-  }, []);
   async function getDataFromServer() {
-    // console.log("kajal hi");
-    
     setFlagLoader(true);
-    let list = await getProductFromBackend();
+    let list=await getProductFromBackend();
     // let info = await axios.get("http://localhost:3000/fruits");
     // setProductList(info.data);
     setFlagLoader(false);
-    list = list.map((e, index) => {
-      e.qty = 0;
+    list= list.map((e,index)=>{
+      e.qty=0;
       return e;
-    });
-    let usr;
-    let cItems = [];
-    await onAuthStateChanged(auth, (user) => {
-      usr = {};
-      if (user) {
-        usr.name = user.displayName;
-        usr.email == user.email;
-        if (usr.email == "khandekarkajal123@gmail.com") {
-          usr.role = "admin";
-        } else {
-          usr.role = "user";
-        }
-      } else {
-        usr.null;
-      }
-    });
-    setUser(usr);
+    })
     setProductList(list);
-    setView("productPage");
+    
   }
-  async function getbill(billId) {
-    setFlagLoader(true);
-    let b = await importBackendDataToBill(billId);
-    console.log("here is the bill");
-    if (b == null) {
-      setbill();
-      setFlagLoader(false);
-      setView("finalbillpage");
-      return;
+  useEffect(() => {
+    getDataFromServer();
+    let storedUser = localStorage.getItem("user");
+    let storedTotalPrice = localStorage.getItem("cartItems");
+    let storedLoginStatus = localStorage.getItem("cartItems");
+    let storedCart = localStorage.getItem("cartItems");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setLoginStatus(storedLoginStatus || "no");
     }
-    console.log("coming datas");
-    setbill(b);
-    setView("finalbillpage");
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
+      setCnt(JSON.parse(storedCart).length);
+    }
+
+    if (storedTotalPrice) {
+      setTotalPrice(parseFloat(storedTotalPrice));
+    }
+  }, []);
+
+  function handleSignUpFormSubmit(event) {
+    let formData = new FormData(event.target);
+    let user = {};
+    for (let data of formData) {
+      user[data[0]] = data[1];
+    }
+    user["role"] = "user";
+    console.log(user);
+    checkUserExists(user);
   }
+
   async function checkUserExists(user) {
     // let response = await axios("http://localhost:3000/users");
-    let response = await getUserFromBackend();
-    let data = response;
+    let response=await getUserFromBackend()
+    let data =response;
     let filteredData = data.filter((e, index) => e.email == user.email);
     if (filteredData.length >= 1) {
       console.log("Already Exists");
@@ -363,7 +300,7 @@ export default function Ecommerce() {
   }
   async function addUser(user) {
     // let response = await axios.post("http://localhost:3000/users", user);
-    let response = await addUserToBackend(user);
+    let response= await addUserToBackend(user)
     setUser(response);
     setSignupStatus("success");
   }
@@ -381,7 +318,7 @@ export default function Ecommerce() {
 
     async function checkUser(userData) {
       // let response = await axios("http://localhost:3000/users");
-      let userdata = await getUserFromBackend();
+      let userdata=await getUserFromBackend()
       let data = userdata;
       let filteredData = data.filter(
         (e, index) =>
@@ -398,7 +335,7 @@ export default function Ecommerce() {
           setLoginStatus("success");
           setTimeout(() => {
             setName(u.name);
-
+           
             setView("productPage");
           }, 2000);
         } else if (u.role == "admin") {
@@ -555,8 +492,9 @@ export default function Ecommerce() {
   }
   async function deleteProductFormServer(p) {
     // let response = await axios.delete("http://localhost:3000/fruits/" + p.id);
+    
 
-    let list = await deleteBackendProduct(p);
+    let list = await deleteBackendProduct(p)
     console.log("list in delete ecom");
     console.log(list);
     setProductList(list);
@@ -615,40 +553,43 @@ export default function Ecommerce() {
   if (flagLoader) {
     return <BeatLoader size={30} color={"black"} className=" text-center" />;
   }
-  function handleLoginButtonClickUsingGoogle() {
+  function handleLoginButtonClickUsingGoogle(){
     signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-        let usr = { user };
-        usr.name = user.displayName;
-        usr.emailid = user.email;
-        if (usr.emailid == "khandekarkajal123@gmail.com") {
-          usr.role = "admin";
-          setView("admin");
-          setLoginStatus("success");
-        } else {
-          usr.role = "user";
-          setView("productPage");
-          setLoginStatus("success");
-        }
-        setUser(usr);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+    let usr ={user};
+    usr.name=user.displayName;
+    usr.emailid=user.email;
+    if(usr.emailid=="khandekarkajal123@gmail.com")
+      {usr.role="admin"
+    setView("admin")
+    setLoginStatus("success")
+  }
+    else {
+      usr.role="user";
+      setView("productPage");
+    setLoginStatus("success")
+
+    }
+    setUser(usr)
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+
+
   }
   return (
     <>
@@ -757,9 +698,6 @@ export default function Ecommerce() {
           </div>
         )}
       </div>
-      {/* <div className="bg">
-        {view == "finalbillpage" && <Billpage bill={bill} />}
-      </div> */}
     </>
   );
 }

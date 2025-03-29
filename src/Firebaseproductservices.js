@@ -19,15 +19,15 @@ async function getProductFromBackend() {
   });
   return list;
 }
-async function getSingleProductFromBackend(id) {
-  const docSnap = await getDoc(doc(db, "products", id));
-  if (docSnap.exists()) {
-    console.log(docSnap.data());
-    return docSnap.data();
-  } else {
-    return null;
-  }
-}
+// async function getSingleProductFromBackend(id) {
+//   const docSnap = await getDoc(doc(db, "products", id));
+//   if (docSnap.exists()) {
+//     console.log(docSnap.data());
+//     return docSnap.data();
+//   } else {
+//     return null;
+//   }
+// }
 async function addProductToBackend(s) {
   const docRef = await addDoc(collection(db, "products"), s);
   console.log("Document written with ID: ", docRef.id);
@@ -37,12 +37,11 @@ async function updateBackendProduct(s) {
   await updateDoc(productRef, s);
 }
 async function deleteBackendProduct(p) {
-  await deleteDoc(doc(db, "products",p.id));
+  await deleteDoc(doc(db, "products", p.id));
 }
 
 export {
   getProductFromBackend,
-  getSingleProductFromBackend,
   addProductToBackend,
   updateBackendProduct,
   deleteBackendProduct,

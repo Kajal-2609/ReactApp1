@@ -8,9 +8,8 @@ export default function AdminProduct(props) {
   function handleEditButtonClick() {
     props.onEditButtonClick(p);
   }
-
   function handleDeleteButtonClick() {
-    let ans = window.confirm("Do you really want to delete   -   " + p.name);
+    let ans = window.confirm("Do you really want to delete  -   " + p.name);
     if (ans) {
       props.onDeleteButtonClick(p, true);
     } else {
