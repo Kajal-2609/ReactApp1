@@ -49,16 +49,24 @@ export default function NavBar(props) {
           {loginStatus == "success" && (
             <div className="text-white h5">Welcome {user.name} !</div>
           )}
-          {!user && (
-           <div className="col-3 col-lg-12 text-center ">
-             <button
-                  className="  login"
-                  onClick={handleLoginButtonClickUsingGoogle}
-                >
-                   Google Login
-                </button>
-           </div>
-         
+
+          {user && (
+            <div className="col-3 col-lg-12 text-center ">
+              <button
+                className="  login"
+                onClick={handleLoginButtonClickUsingGoogle}
+              >
+                Google Login
+              </button>
+            </div>
+          )}
+          {(view == "productPage" ||
+            view == "admin" ||
+            view == "bill" ||
+            loginStatus == "success") && (
+            <button className="login  m-2" onClick={handleLogoutClick}>
+              Logout
+            </button>
           )}
 
           {/* {user ? (

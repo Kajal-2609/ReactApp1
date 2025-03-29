@@ -518,15 +518,26 @@ export default function Ecommerce() {
 
   //handle logout button clicked
   function handleLogoutClick() {
-    setUser(null); // Clear user data
-    setView("productPage");
-    setLoginStatus("no"); // Reset login status
-    setSignupStatus("no"); // Reset signup status (if needed)
-    setMessage(""); // Clear any messages
-    localStorage.removeItem("user");
-    localStorage.removeItem("loginStatus");
+    // setUser(null); // Clear user data
+    // setView("productPage");
+    // setLoginStatus("no"); // Reset login status
+    // setSignupStatus("no"); // Reset signup status (if needed)
+    // setMessage(""); // Clear any messages
+    // localStorage.removeItem("user");
+    // localStorage.removeItem("loginStatus");
 
     //  setView("Login");
+    auth.signOut();
+    setView("productPage");
+    setUser("");
+    if(cnt<=0&& totalprice<=0){
+      setView("productPage")
+    }else if(!user){
+      setCartItems("");
+      setTimeout(() => {
+        window.alert("u need to login first");
+      }, 1000);
+    }
   }
 
   // login click button after signup form

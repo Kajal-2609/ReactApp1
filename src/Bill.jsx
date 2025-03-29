@@ -31,12 +31,11 @@ export default function Bill(props) {
     await updateBackendBills(b);
     let billId = BillObj.id;
     console.log(billId);
-    setFlagLoader(false);
-    window.localStorage.setItem("cartItems", JSON.stringify([]));
-    let message = `I am ${name}.My Bill Number is ${currentBillNumber}.its link is ${window.location}?id=${billId}`;
 
-    window.location =
-      `https://api.whatsapp.com/send?phone=${phonenumber}&text=` + message;
+    window.localStorage.setItem("cartItems", JSON.stringify([]));
+    let message = `I am ${name}.My Bill Number is ${currentBillNumber}.its link is ${window.location}?id=${billId} `;
+    setFlagLoader(false);
+    window.location = `https://api.whatsapp.com/send?phone=918799815906&text=${message}`;
   }
   if (flagLoader) {
     return <RingLoader size={24} color={"red"} className="text-center" />;
