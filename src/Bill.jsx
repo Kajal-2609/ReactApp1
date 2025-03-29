@@ -11,7 +11,7 @@ export default function Bill(props) {
   let { name } = props;
   let { totalprice } = props;
   let { user } = props;
-  const phonenumber = "8799815906";
+  const phonenumber = "918799815906";
 
   let [flagLoader, setFlagLoader] = useState(false);
   const currentDate = new Date().toLocaleDateString();

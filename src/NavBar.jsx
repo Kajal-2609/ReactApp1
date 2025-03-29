@@ -49,7 +49,7 @@ export default function NavBar(props) {
           {loginStatus == "success" && (
             <div className="text-white h5">Welcome {user.name} !</div>
           )}
-          {user && (
+          {!user && (
            <div className="col-3 col-lg-12 text-center ">
              <button
                   className="  login"
