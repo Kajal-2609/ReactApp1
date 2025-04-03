@@ -41,7 +41,7 @@ export default function NavBar(props) {
         >
           <img
             className="   img-fluid border-black logobr w-50 h-25 "
-            src="/logo.png"
+            src="/logo.jpg"
             alt=""
           />
         </div>
@@ -55,7 +55,7 @@ export default function NavBar(props) {
                   className="  login"
                   onClick={handleLoginButtonClickUsingGoogle}
                 >
-                   Google Login
+                  Google login 
                 </button>
            </div>
          

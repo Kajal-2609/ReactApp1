@@ -278,7 +278,6 @@ export default function Ecommerce() {
     if (window.location.search == "") {
       getDataFromServer();
       // console.log("kajal");
-      
     } else {
       let param = new URLSearchParams(window.location.search);
       let billId = param.get("id");
@@ -296,7 +295,7 @@ export default function Ecommerce() {
   }, []);
   async function getDataFromServer() {
     // console.log("kajal hi");
-    
+
     setFlagLoader(true);
     let list = await getProductFromBackend();
     // let info = await axios.get("http://localhost:3000/fruits");
@@ -319,7 +318,7 @@ export default function Ecommerce() {
           usr.role = "user";
         }
       } else {
-        usr.null;
+        usr = null;
       }
     });
     setUser(usr);
@@ -331,7 +330,7 @@ export default function Ecommerce() {
     let b = await importBackendDataToBill(billId);
     console.log("here is the bill");
     if (b == null) {
-      setbill();
+      setbill(b);
       setFlagLoader(false);
       setView("finalbillpage");
       return;
@@ -339,6 +338,7 @@ export default function Ecommerce() {
     console.log("coming datas");
     setbill(b);
     setView("finalbillpage");
+    setFlagLoader(false);
   }
   async function checkUserExists(user) {
     // let response = await axios("http://localhost:3000/users");
@@ -530,9 +530,9 @@ export default function Ecommerce() {
     auth.signOut();
     setView("productPage");
     setUser("");
-    if(cnt<=0&& totalprice<=0){
-      setView("productPage")
-    }else if(!user){
+    if (cnt <= 0 && totalprice <= 0) {
+      setView("productPage");
+    } else if (!user) {
       setCartItems("");
       setTimeout(() => {
         window.alert("u need to login first");
@@ -768,9 +768,9 @@ export default function Ecommerce() {
           </div>
         )}
       </div>
-      {/* <div className="bg">
+       <div className="bg">
         {view == "finalbillpage" && <Billpage bill={bill} />}
-      </div> */}
+      </div> 
     </>
   );
 }

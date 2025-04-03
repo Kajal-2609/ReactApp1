@@ -1,21 +1,61 @@
-export default function Billpage(props) {
-  let { bill } = props;
+import { useState } from "react";
+import {
+  getBillsFromBackend,
+  addBillsToBackend,
+  updateBackendBills,
+} from "./Firebasebillservices";
+import { BeatLoader, RingLoader } from "react-spinners";
+export default function Bill(props) {
+  let { cartItems } = props;
+  let { price } = props;
+  let { name } = props;
+  let { totalprice } = props;
+  let { user } = props;
+  const phonenumber = "918799815906";
+
+  let [flagLoader, setFlagLoader] = useState(false);
   const currentDate = new Date().toLocaleDateString();
-  console.log("bill");
-  const formatcurrency = (amount) => {
-    return amount.toLocaleString("en-IN", {
-      maximumFractionDigits: 2,
-      minimumFractionDigits: 2,
-    });
-  };
-  const getDiscountedPrice = (mrp, discount) => {
-    return mrp - (mrp * discount) / 100;
-  };
+  async function handleBillCreateClick() {
+    setFlagLoader(true);
+    let b = await getBillsFromBackend();
+
+    let currentBillNumber = b.lastbillnumber + 1;
+    let BillObj = {};
+    BillObj.billNumber = currentBillNumber;
+    BillObj.customer = user.name;
+    BillObj.date = new Date();
+    BillObj.amount = totalprice;
+    BillObj.soldProducts = cartItems;
+    BillObj = await addBillsToBackend(BillObj);
+    b.lastbillnumber = currentBillNumber;
+    await updateBackendBills(b);
+    let billId = BillObj.id;
+    console.log(billId);
+
+    window.localStorage.setItem("cartItems", JSON.stringify([]));
+    let message = `I am ${name}.My Bill Number is ${currentBillNumber}.its link is ${window.location}?id=${billId} `;
+    setFlagLoader(false);
+    window.location = `https://api.whatsapp.com/send?phone=918799815906&text=${message}`;
+  }
+  if (flagLoader) {
+    return <RingLoader size={24} color={"red"} className="text-center" />;
+  }
+  //   function handleChangeButtonClick(op, e) {
+  //     props.onChangeButtonClick(op, e);
+  //   }
+
   return (
     <>
       <div className="my-5 p-5 "></div>
       {
-        <div className="row ">
+        <div className=" ">
+          <div className="text-center text-white">
+            <a href="#" onClick={handleBillCreateClick}>
+              Share
+            </a>{" "}
+            Bill on WhatsApp
+          </div>
+
           <div className="bill text-white  mycontainer mx-auto billbox text-center bg-opacity-75 bg-body">
             <div className=" mx-auto p-2 pb-1 text-black pt-2 my-auto h5  ">
               || Shree ||
@@ -28,7 +68,7 @@ export default function Billpage(props) {
               Date: {currentDate}{" "}
             </div>
             <div className="h5 text-black ps-5">
-              Customer Name : {bill.customer}
+              Customer Name : {user.name}
             </div>
 
             <div className="row">
@@ -40,11 +80,9 @@ export default function Billpage(props) {
               <div className="col-2 h5 text-black">Total</div>
             </div>
 
-            {bill.soldProducts.map((e, index) => {
-              const DiscountedPrice = getDiscountedPrice(e.mrp, e.discount);
-              const totalprice = DiscountedPrice * e.qty;
+            {cartItems.map((e, index) => {
               return (
-                <div className="row " key={index}>
+                <div className="row ">
                   <div className="col-4 text-start ps-3 text-black">{`${
                     index + 1
                   }) ${e.name}`}</div>
@@ -55,8 +93,7 @@ export default function Billpage(props) {
                         {e.mrp}{" "}
                       </span>{" "}
                       <span className="h5">
-                        {/* {e.mrp - e.mrp * (e.discount / 100).toFixed(1)} */}
-                        {formatcurrency(DiscountedPrice)}
+                        {e.mrp - e.mrp * (e.discount / 100).toFixed(1)}
                       </span>
                     </div>
                   </div>
@@ -64,8 +101,7 @@ export default function Billpage(props) {
                     {e.qty} {e.unit}
                   </div>
                   <div className="col-2 text-black h5 ">
-                    {/* {e.mrp - e.mrp * (e.discount / 100).toFixed(1)} */}
-                    rs{formatcurrency(totalprice)}
+                    {e.mrp - e.mrp * (e.discount / 100).toFixed(1)}
                   </div>
                 </div>
               );
@@ -73,11 +109,7 @@ export default function Billpage(props) {
 
             <div className="row">
               <div className="col-12 text-end h5 text-black pb-1">
-                Grand Total : Rs.{" "}
-                {bill.amount.toLocaleString("en-IN", {
-                  maximumFractionDigits: 2,
-                  minimumFractionDigits: 2,
-                })}
+                Grand Total : Rs. {totalprice}
               </div>
               {/* <div className="col-2 text-start pe-5 h5 text-white">Rs. {totalprice} </div> */}
             </div>

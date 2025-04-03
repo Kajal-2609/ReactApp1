@@ -12,7 +12,7 @@ function App() {
       {/* <Ass59></Ass59> */}
       {/* <Ass60></Ass60> */}
        <Ecomm /> 
-      {/* <Ecommweb /> */}
+       {/* <Ecommweb />  */}
     </>
   );
 }
