@@ -47,6 +47,9 @@ export default function CartItem(props) {
         >
           Buy.
         </a>
+        {/* <button onClick={handleBuyButtonClick}>
+          buy
+        </button> */}
       </div>
       <div className="mb-1 p-2  text-center text-white">
         <a href="#" onClick={handleBackButtonClick}>

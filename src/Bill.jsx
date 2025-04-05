@@ -26,17 +26,33 @@ export default function Bill(props) {
     BillObj.date = new Date();
     BillObj.amount = totalprice;
     BillObj.soldProducts = cartItems;
+    console.log(BillObj);
+
     BillObj = await addBillsToBackend(BillObj);
+    console.log(BillObj);
     b.lastbillnumber = currentBillNumber;
     await updateBackendBills(b);
     console.log(b);
-    
+
     let billId = BillObj.id;
     console.log(billId);
 
     window.localStorage.setItem("cartItems", JSON.stringify([]));
-    let message = `I am ${user.name}.My Bill Number is ${currentBillNumber}.its link is ${window.location}?id=${billId} `;
+    let location;
+    console.log(window.location.href);
+    
+    if (window.location.href.indexOf("#")!=-1) {
+      location = window.location.href.slice(0, window.location.href.length - 1);
+    }
+    else
+    {
+      location=window.location.href;
+    }
+    
+    let message = `I am ${user.name}.My Bill Number is ${currentBillNumber}.its link is ${location}?id=${billId}  `;
     setFlagLoader(false);
+    console.log(message);
+
     window.location = `https://api.whatsapp.com/send?phone=918799815906&text=${message}`;
   }
   if (flagLoader) {

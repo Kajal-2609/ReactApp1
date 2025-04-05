@@ -41,7 +41,7 @@ export default function NavBar(props) {
         >
           <img
             className="   img-fluid border-black logobr w-50 h-25 "
-            src="/logo.png"
+            src="/fruitlogo.jpg"
             alt=""
           />
         </div>
@@ -100,7 +100,7 @@ export default function NavBar(props) {
             </>
           )} */}
         </div>
-        <div className=" col-lg-1  col-3   text-black  cart   ">
+        <div className=" col-lg-1  col-3   text-black  cart  ">
           <div className="">
             <button
               className="cart-container radius "

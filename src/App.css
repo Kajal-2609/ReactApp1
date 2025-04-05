@@ -218,10 +218,10 @@ img {
   background-image: linear-gradient(to right, #ec77ab 0%, #7873f5 100%);
 }
 .logobr {
-  border-radius: 100%;
+  border-radius: 50%;
   border: rgb(7, 4, 4);
-  padding: 10px;
-  background-color: #5b42f3;
+  padding: 9px;
+  background-color: plum;
 }
 
 .name {
