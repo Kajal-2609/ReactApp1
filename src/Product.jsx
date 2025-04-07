@@ -19,7 +19,7 @@ export default function Product(props) {
   }
   return (
     <>
-      <div className="col-5 mx-2 text-lg-center m-lg-3 my-lg-5  p-lg-4  col-lg-2 b  radius   boxbg box  bg-opacity-75 bg-body  ">
+      <div className="col-5 mx-2 text-lg-center m-lg-3 my-lg-5  p-lg-4  col-lg-2 b  radius  box    bg-opacity-75  bg-body ">
         <div className=" position-absolute col-lg-2 myb col-5  radiu  md">
           {p.discount > 0 ? "" + p.discount + "% discount" : " "}
         </div>
@@ -50,19 +50,19 @@ export default function Product(props) {
             <div className="row">
               <div className="col-4 col-lg-2 ps-lg-2 my-lg-0 ">
                 <button
-                  className="btn bsize    plusminusb "
+                  className="btn  login    plusminusb "
                   id="-"
                   onClick={handleDecrementButtonClick}
                 >
                   -
                 </button>{" "}
               </div>
-              <div className="col-4 col-lg-8 ps-lg-0     pt-0 h9">
+              <div className="col-4 col-lg-8 ps-lg-0     pt-0 h6">
                 qty: {p.qty} {p.qty != 0 ? ` Rs. ${displayprice}` : " "}
               </div>
               <div className="col-4 col-lg-2 ps-lg-0">
                 <button
-                  className="btn bsize text-center plusminusb "
+                  className="btn  text-center  login plusminusb "
                   id="+"
                   onClick={handleIncrementButtonClick}
                 >

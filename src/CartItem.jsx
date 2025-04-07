@@ -86,7 +86,7 @@ export default function CartItem(props) {
               <div className="row ">
                 <div className="col-6 text-start ps-5  col-12 ">
                   <button
-                    className="  plusminusb me-4 login bsize "
+                    className="  plusminusb me-4 login "
                     onClick={() => {
                       handleDecrementButtonClick(p);
                     }}
@@ -95,7 +95,7 @@ export default function CartItem(props) {
                   </button>
                   <h7 className="text-black">{p.qty}</h7>
                   <button
-                    className=" bsize ms-4  plusminusb login "
+                    className="  ms-4  plusminusb login "
                     onClick={() => {
                       handleIncrementButtonClick(p);
                     }}

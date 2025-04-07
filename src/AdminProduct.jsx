@@ -32,7 +32,7 @@ export default function AdminProduct(props) {
   }
   return (
     <>
-      <div className="col-5 mx-2 text-lg-center m-lg-3 my-lg-5  p-lg-4  col-lg-2 b  radius   boxbg box  bg-opacity-75 bg-body">
+      <div className="col-5 mx-2 text-lg-center m-lg-3 my-lg-5  p-lg-4  col-lg-2 b  radius   bg-opacity-75  bg-body  ">
         <div className=" position-absolute radius  md">
           {p.discount > 0 ? "" + p.discount + "% discount" : " "}
         </div>
@@ -50,13 +50,13 @@ export default function AdminProduct(props) {
         )}
         <div className="text-center m-3">
           <button
-            className="login plusminusb bsize"
+            className="login plusminusb "
             onClick={handleEditButtonClick}
           >
             <i class="bi bi-box-arrow-in-down-left"></i>
           </button>{" "}
           <button
-            className=" login plusminusb bsize m-1"
+            className=" login plusminusb  m-1"
             onClick={handleDeleteButtonClick}
           >
             <i class="bi bi-trash3"></i>

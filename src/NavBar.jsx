@@ -33,41 +33,42 @@ export default function NavBar(props) {
   }
   return (
     <>
-      <div className=" row fixed-top  bgi   align-items-center justify-content-around border-bottom border-4 border-black      ">
+      <div className=" row fixed-top  bgi   align-items-center justify-content-around border-bottom border-black border-4       ">
         <div
-          className="col-4  col-lg-2  text-center "
+          className="col-4 col-lg-2  text-start   "
           id=" logo"
           onClick={() => handleFormButtonClick("productPage")}
         >
           <img
-            className="   img-fluid border-black logobr w-50 h-25 "
-            src="/fruitlogo.jpg"
+            className="   img-fluid border-black logobr w-75 h-75  "
+            src="/fruitlogo-removebg-preview.png"
             alt=""
           />
         </div>
-        <div className="col-5 col-lg-5 col-sm-6 col-md-12 text-center  ">
+        <div className="col-4 col-lg-5 col-sm-6 col-md-12 text-center  ">
           {loginStatus == "success" && (
-            <div className="text-white h5">Welcome {user.name} !</div>
+            <div className="text-white h6">Welcome {user.name} !</div>
           )}
 
-          {user && (
-            <div className="col-3 col-lg-12 text-center ">
-              <button
-                className="  login"
-                onClick={handleLoginButtonClickUsingGoogle}
-              >
-                Google Login
-              </button>
-            </div>
-          )}
-          {(view == "productPage" ||
+            {!user || (
+              <div className="col-12 col-lg-12 col-sm-6 col-md-12 pt-lg-1 text-center   ">
+                <button
+                  className="  login"
+                  onClick={handleLoginButtonClickUsingGoogle}
+                >
+                  Google Login
+                </button>
+              </div>
+            )}
+         
+          {/* {(view == "productPage" ||
             view == "admin" ||
             view == "bill" ||
-            loginStatus == "success") && (
+            (view = "cart" && loginStatus == "success")) && (
             <button className="login  m-2" onClick={handleLogoutClick}>
               Logout
             </button>
-          )}
+          )} */}
 
           {/* {user ? (
             <>
@@ -100,18 +101,13 @@ export default function NavBar(props) {
             </>
           )} */}
         </div>
-        <div className=" col-lg-1  col-3   text-black  cart  ">
-          <div className="">
-            <button
-              className="cart-container radius "
-              onClick={handleCartItems}
-            >
-              <i className=" bi-cart2  fs-1">
-                {cnt}
-                <div className="h6 text-center ">Rs.{totalprice}</div>
-              </i>
-            </button>
-          </div>
+        <div className=" col-lg-1  col-4   pe-lg-0 pe-5 text-black  col-sm-12 text-center pt-lg-3 pt-3 pb-2  ">
+          <button className="cart-container radius " onClick={handleCartItems}>
+            <i className=" bi-cart2  fs-1">
+              {cnt}
+              <div className="h6 text-center ">Rs.{totalprice}</div>
+            </i>
+          </button>
         </div>
       </div>
 

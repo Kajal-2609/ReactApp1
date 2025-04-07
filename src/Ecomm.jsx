@@ -393,7 +393,7 @@ export default function Ecommerce() {
         setUser(filteredData[0]);
         let u = filteredData[0];
         localStorage.setItem("user", JSON.stringify(filteredData[0]));
-        localStorage.setItem("loginStatus", "suceess");
+        localStorage.setItem("loginStatus", "success");
         if (u.role == "user") {
           setLoginStatus("success");
           setTimeout(() => {
@@ -677,7 +677,7 @@ export default function Ecommerce() {
           onLoginButtonClickUsingGoogle={handleLoginButtonClickUsingGoogle}
         ></NavBar>
       </div>
-      <div className="  colour">
+      <div className="">
         {view == "productPage" && (
           <div className=" ">
             <ProductPage
@@ -690,7 +690,7 @@ export default function Ecommerce() {
             ></ProductPage>
           </div>
         )}
-        {view == "Login" && (
+        {/* {view == "Login" && (
           <div className="bg vh-100">
             <Login
               onClick={handleFormButtonClick}
@@ -714,7 +714,7 @@ export default function Ecommerce() {
               // onChange={checkUser}
             />
           </div>
-        )}
+        )} */}
         {view == "cart" && (
           <div className="bg vh-100 ">
             <CartItem
