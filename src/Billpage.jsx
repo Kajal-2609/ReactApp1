@@ -60,7 +60,7 @@ export default function Billpage(props) {
                       </span>
                     </div>
                   </div>
-                  <div className="ccol-2 text-black text-start h6 ps-0 col-lg-3 ps-lg-5 mx-lg-4">
+                  <div className="col-2 text-black text-start h6 ps-0 col-lg-3 ps-lg-5 mx-lg-4">
                     {e.qty} {e.unit}
                   </div>
                   <div className="col-2 text-black h6 col-lg-2 ps-lg-0 text-start ">
