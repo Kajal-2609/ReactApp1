@@ -65,7 +65,7 @@ export default function Billpage(props) {
                   </div>
                   <div className="col-2 text-black h6 col-lg-2 ps-lg-0 text-start ">
                     {/* {e.mrp - e.mrp * (e.discount / 100).toFixed(1)} */}
-                    rs{formatcurrency(totalprice)}
+                    {formatcurrency(totalprice)}
                   </div>
                 </div>
               );
