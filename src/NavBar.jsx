@@ -46,11 +46,11 @@ export default function NavBar(props) {
           />
         </div>
         <div className="col-4 col-lg-5 col-sm-6 col-md-12 text-center  ">
-          {loginStatus == "success" && (
+          {loginStatus == "success" && user && (
             <div className="text-white h6">Welcome {user.name} !</div>
           )}
 
-            {!user || (
+            {!user && (
               <div className="col-12 col-lg-12 col-sm-6 col-md-12 pt-lg-1 text-center   ">
                 <button
                   className="  login"
@@ -61,14 +61,14 @@ export default function NavBar(props) {
               </div>
             )}
          
-          {/* {(view == "productPage" ||
+          {(view == "productPage" ||
             view == "admin" ||
             view == "bill" ||
             (view = "cart" && loginStatus == "success")) && (
             <button className="login  m-2" onClick={handleLogoutClick}>
               Logout
             </button>
-          )} */}
+          )}
 
           {/* {user ? (
             <>

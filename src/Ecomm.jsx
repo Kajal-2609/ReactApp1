@@ -312,6 +312,7 @@ export default function Ecommerce() {
       if (user) {
         usr.name = user.displayName;
         usr.email == user.email;
+        setLoginStatus("success")
         if (usr.email == "khandekarkajal123@gmail.com") {
           usr.role = "admin";
         } else {
