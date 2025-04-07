@@ -40,15 +40,13 @@ export default function Bill(props) {
     window.localStorage.setItem("cartItems", JSON.stringify([]));
     let location;
     console.log(window.location.href);
-    
-    if (window.location.href.indexOf("#")!=-1) {
+
+    if (window.location.href.indexOf("#") != -1) {
       location = window.location.href.slice(0, window.location.href.length - 1);
+    } else {
+      location = window.location.href;
     }
-    else
-    {
-      location=window.location.href;
-    }
-    
+
     let message = `I am ${user.name}.My Bill Number is ${currentBillNumber}.its link is ${location}?id=${billId}  `;
     setFlagLoader(false);
     console.log(message);
@@ -79,9 +77,7 @@ export default function Bill(props) {
               || Shree ||
             </div>
             <div className="h3 text-black"> KK Fruit Mart </div>
-            <div className="h5 text-black">
-              220 , Market Yard , Pune - 411009
-            </div>
+            <div className="h5 text-black">220 , MIDC , Dharashiv - 413501</div>
             <div className="text-end text-black pe-5 h5 ">
               Date: {currentDate}{" "}
             </div>
@@ -90,9 +86,13 @@ export default function Bill(props) {
             </div>
 
             <div className="row">
-              <div className="col-4 h5 text-black text-start">Product</div>
-              <div className="col-3 h5 text-black text-start ">Rate</div>
-              <div className="col-3 h5 text-black text-center pe-3 ">
+              <div className="col-3 col-lg-3 h6 text-start text-black">
+                Product
+              </div>
+              <div className="col-2  col-lg-3 h6 ps-0 text-black text-center ">
+                Rate
+              </div>
+              <div className="col-3 h6 col-lg-3 text-black text-center ps-0 ">
                 Quantity
               </div>
               <div className="col-2 h5 text-black">Total</div>
@@ -100,33 +100,33 @@ export default function Bill(props) {
 
             {cartItems.map((e, index) => {
               return (
-                <div className="row ">
-                  <div className="col-4 text-start ps-3 text-black">{`${
+                <div className="row " key={index}>
+                  <div className="col-2 col-lg-3 text-start h6 text-black">{`${
                     index + 1
                   }) ${e.name}`}</div>
-                  <div className="col-4 ps-0  text-start">
-                    <div className=" text-black">
+                  <div className="col-4 ps-lg-0 col-lg-3  h6 ">
+                    <div className=" text-black h6">
                       Rs.{" "}
-                      <span className="text-decoration-line-through text-black h5 ">
+                      <span className="text-decoration-line-through text-black h6 ">
                         {e.mrp}{" "}
                       </span>{" "}
-                      <span className="h5">
+                      <span className="h6">
                         {e.mrp - e.mrp * (e.discount / 100).toFixed(1)}
                       </span>
                     </div>
                   </div>
-                  <div className="col-2 text-black text-start h5 ps-0">
+                  <div className="col-2 text-black text-start h6 ps-0 col-lg-3 ps-lg-5 mx-lg-4">
                     {e.qty} {e.unit}
                   </div>
-                  <div className="col-2 text-black h5 ">
+                  <div className="col-2 text-black h6 col-lg-2 ps-lg-0 text-start">
                     {e.mrp - e.mrp * (e.discount / 100).toFixed(1)}
                   </div>
                 </div>
               );
             })}
 
-            <div className="row">
-              <div className="col-12 text-end h5 text-black pb-1">
+            <div className="row my-1">
+              <div className="col-9 col-lg-9 text-end h5 text-black pb-1">
                 Grand Total : Rs. {totalprice}
               </div>
               {/* <div className="col-2 text-start pe-5 h5 text-white">Rs. {totalprice} </div> */}
