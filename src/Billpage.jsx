@@ -32,9 +32,9 @@ export default function Billpage(props) {
             </div>
 
             <div className="row">
-              <div className="col-4 h5 text-black text-start">Product</div>
-              <div className="col-3 h5 text-black text-start ">Rate</div>
-              <div className="col-3 h5 text-black text-center pe-3 ">
+              <div className="col-3 col-lg-3 h6 text-start text-black">Product</div>
+              <div className="col-2  col-lg-3 h6 ps-0 text-black text-center ">Rate</div>
+              <div className="col-3 h6 col-lg-3 text-black text-center ps-0 ">
                 Quantity
               </div>
               <div className="col-2 h5 text-black">Total</div>
@@ -45,25 +45,25 @@ export default function Billpage(props) {
               const totalprice = DiscountedPrice * e.qty;
               return (
                 <div className="row " key={index}>
-                  <div className="col-4 text-start ps-3 text-black">{`${
+                  <div className="col-2 col-lg-3 text-start h6 text-black">{`${
                     index + 1
                   }) ${e.name}`}</div>
-                  <div className="col-4 ps-0  text-start">
-                    <div className=" text-black">
+                  <div className="col-4 ps-lg-0 col-lg-3  h6 ">
+                    <div className=" text-black h6">
                       Rs.{" "}
                       <span className="text-decoration-line-through text-black h5 ">
                         {e.mrp}{" "}
                       </span>{" "}
-                      <span className="h5">
+                      <span className="h6">
                         {/* {e.mrp - e.mrp * (e.discount / 100).toFixed(1)} */}
                         {formatcurrency(DiscountedPrice)}
                       </span>
                     </div>
                   </div>
-                  <div className="col-2 text-black text-start h5 ps-0">
+                  <div className="ccol-2 text-black text-start h6 ps-0 col-lg-3 ps-lg-5 mx-lg-4">
                     {e.qty} {e.unit}
                   </div>
-                  <div className="col-2 text-black h5 ">
+                  <div className="col-2 text-black h6 col-lg-2 ps-lg-0 text-start ">
                     {/* {e.mrp - e.mrp * (e.discount / 100).toFixed(1)} */}
                     rs{formatcurrency(totalprice)}
                   </div>
@@ -71,8 +71,8 @@ export default function Billpage(props) {
               );
             })}
 
-            <div className="row">
-              <div className="col-12 text-end h5 text-black pb-1">
+            <div className="row my-1">
+              <div className="col-9 col-lg-9 text-end h5 text-black pb-1">
                 Grand Total : Rs.{" "}
                 {bill.amount.toLocaleString("en-IN", {
                   maximumFractionDigits: 2,
