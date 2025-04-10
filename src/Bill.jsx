@@ -77,7 +77,9 @@ export default function Bill(props) {
               || Shree ||
             </div>
             <div className="h3 text-black"> KK Fruit Mart </div>
-            <div className="h5 text-black">220 , MIDC , Dharashiv - 413501</div>
+            <div className="h5 text-black">
+              220 , Market yard , Pune - 411009
+            </div>
             <div className="text-end text-black pe-5 h5 ">
               Date: {currentDate}{" "}
             </div>

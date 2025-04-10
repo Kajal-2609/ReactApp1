@@ -22,7 +22,7 @@ export default function Billpage(props) {
             </div>
             <div className="h3 text-black"> KK Fruit Mart </div>
             <div className="h5 text-black">
-              220 , Market Yard , Pune - 411009
+              220 , Market yard, Pune - 411009
             </div>
             <div className="text-end text-black pe-5 h5 ">
               Date: {currentDate}{" "}

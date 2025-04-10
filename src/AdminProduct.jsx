@@ -3,8 +3,9 @@ import NavBar from "./NavBar";
 
 export default function AdminProduct(props) {
   let { p } = props;
-  let finalprice = p.mrp - p.mrp * (p.discount / 100).toFixed(1);
-  let displayprice = p.qty * finalprice;
+  let {index}=props;
+  // let finalprice = p.mrp - p.mrp * (p.discount / 100).toFixed(2);
+  // let displayprice = p.qty * finalprice;
   function handleEditButtonClick() {
     props.onEditButtonClick(p);
   }
@@ -32,11 +33,11 @@ export default function AdminProduct(props) {
   }
   return (
     <>
-      <div className="col-5 mx-2 text-lg-center m-lg-3 my-lg-5  p-lg-4  col-lg-2 b  radius   bg-opacity-75  bg-body  ">
+      <div className="col-5 mx-2 text-lg-center m-lg-3 my-lg-5  p-lg-4   m-2 col-lg-2 b  radius   bg-opacity-75  bg-body  ">
         <div className=" position-absolute radius  md">
-          {p.discount > 0 ? "" + p.discount + "% discount" : " "}
+          { p.discount > 0 ?  `${ p.discount } % discount` :` `}
         </div>
-        <img className=" img-fluid  " src={p.image} alt="" />
+        <img className=" img-fluid  " src={p.image} alt=" " />
 
         <div className="h5">
           {p.name}{p.discount > 0 ? "(" + p.discount + "%)" : ""}
@@ -45,7 +46,7 @@ export default function AdminProduct(props) {
         {p.discount != 0 && (
           <h5>
             Rs. <span className="text-decoration-line-through">{p.mrp}</span>{" "}
-            {finalprice}
+            {p.mrp - p.mrp * (p.discount / 100).toFixed(2)}
           </h5>
         )}
         <div className="text-center m-3">

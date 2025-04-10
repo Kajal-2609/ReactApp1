@@ -230,7 +230,7 @@ export default function AdminProductForm(props) {
     }
   }, [adminView, props.selectedProduct]);
   function handleProductListClick() {
-    props.onProductListClick();
+    props.onProductListClick("list");
   }
   function handleTextChange(event) {
     let name = event.target.name;

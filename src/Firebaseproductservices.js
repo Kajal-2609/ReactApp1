@@ -28,8 +28,8 @@ async function getProductFromBackend() {
 //     return null;
 //   }
 // }
-async function addProductToBackend(s) {
-  const docRef = await addDoc(collection(db, "products"), s);
+async function addProductToBackend(product) {
+  const docRef = await addDoc(collection(db, "products"), product);
   console.log("Document written with ID: ", docRef.id);
 }
 async function updateBackendProduct(s) {

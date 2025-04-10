@@ -560,9 +560,12 @@ export default function Ecommerce() {
   function handleDeleteButtonClick(p, flag) {
     if (flag) {
       deleteProductFormServer(p);
+      setView("admin")
     } else {
       setMessage("Delete Operation Cancelled");
       clearMessege();
+      setView("admin")
+
     }
   }
   async function deleteProductFormServer(p) {
@@ -662,6 +665,7 @@ export default function Ecommerce() {
         // ...
       });
   }
+  
   return (
     <>
       <div className=" col-sm-12 col-md-6 col-lg-12">
@@ -765,6 +769,8 @@ export default function Ecommerce() {
               onDeleteButtonClick={handleDeleteButtonClick}
               onProductEditFormSubmit={handleProductAddEditFormSubmit}
               onProductAddFormSubmit={handleProductAddEditFormSubmit}
+             
+
             />
           </div>
         )}

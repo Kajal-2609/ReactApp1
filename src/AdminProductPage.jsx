@@ -27,12 +27,13 @@ export default function AdminProductPage(props) {
       });
 
       props.onProductEditFormSubmit(list);
-      // adminView("list");
+      setAdminView("list");
     } else if (adminView == "add") {
       console.log("for Add");
       let list = [...productList];
       list.push(p);
       props.onProductAddFormSubmit(list);
+      setAdminView("list");
     }
   }
 
